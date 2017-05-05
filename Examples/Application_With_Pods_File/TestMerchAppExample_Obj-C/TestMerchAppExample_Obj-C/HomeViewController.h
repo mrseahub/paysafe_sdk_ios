@@ -8,12 +8,13 @@
 #import <UIKit/UIKit.h>
 #import "OPTAuthorizationProcess.h"
 
-#import <iOS_SDK/OPAYPaymentAuthorizationProcess.h>
+#import <iOS_SDK/PaySafePaymentAuthorizationProcess.h>
+
 
 #import "CreditCardViewController.h"
 
 
-@interface HomeViewController : UIViewController <OPAYPaymentAuthorizationProcessDelegate, UITextFieldDelegate, AuthorizationProcessDelegate>
+@interface HomeViewController : UIViewController <PaysafePaymentAuthorizationProcessDelegate, UITextFieldDelegate, AuthorizationProcessDelegate>
 {
     
 }
@@ -29,7 +30,7 @@
 
 @property (nonatomic, retain) IBOutlet UIButton *btnBack;
 
-@property (nonatomic, retain) OPAYPaymentAuthorizationProcess *OPAYAuthController;
+@property (nonatomic, retain) PaySafePaymentAuthorizationProcess *PaysafeAuthController;
 @property (nonatomic, retain) OPTAuthorizationProcess *OPTAuthObj;
 
 

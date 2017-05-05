@@ -10,10 +10,9 @@
 
 import Foundation
 
-class TVViewController: UIViewController , UITextFieldDelegate, AuthorizationProcessDelegate,OPAYPaymentAuthorizationProcessDelegate
+class TVViewController: UIViewController , UITextFieldDelegate, AuthorizationProcessDelegate,PaysafePaymentAuthorizationProcessDelegate
 {
     
-    var OPTApplePaySDKObj : OPAYPaymentAuthorizationProcess? // = OPTPaymentAuthorizationProcess()
     @IBOutlet var payNowButton : UIButton?
     var isApplePaySupports : Bool?
     
@@ -22,8 +21,7 @@ class TVViewController: UIViewController , UITextFieldDelegate, AuthorizationPro
     var isOn:Bool = false
     @IBOutlet var merchantRefField : UITextField?
     @IBOutlet var amountField : UITextField?
-    
-     @IBOutlet var  btnBack:UIButton!
+
     
     var authorizationData: NSDictionary = NSDictionary()
     
@@ -34,13 +32,14 @@ class TVViewController: UIViewController , UITextFieldDelegate, AuthorizationPro
         
         super.viewDidLoad()
         
-        btnBack.layer.cornerRadius=10;
+        self.title = "Apple Pay"
         
-        if(appDelegate.OPAYAuthController?.isApplePaySupport() == false){
+        if(appDelegate.PaysafeAuthController?.isApplePaySupport() == false){
             payNowButton?.setImage(UIImage(named: "payNow_img"), forState: .Normal)
             isApplePaySupports = false
         }
-        else{
+        else
+        {
             isApplePaySupports = true
         }
         
@@ -62,33 +61,28 @@ class TVViewController: UIViewController , UITextFieldDelegate, AuthorizationPro
         
 #if (arch(i386) || arch(x86_64)) && os(iOS)
     
-      appDelegate.OPAYAuthController?.authDelegate = self
-      appDelegate.OPAYAuthController?.beginPayment(self, withRequestData: createDataDictionary(), withCartData: createCartData())
+      appDelegate.PaysafeAuthController?.authDelegate = self
+      appDelegate.PaysafeAuthController?.beginPayment(self, withRequestData: createDataDictionary(), withCartData: createCartData())
     
 #else
     
-    if(appDelegate.OPAYAuthController?.isApplePaySupport() == true)
+    if(appDelegate.PaysafeAuthController?.isApplePaySupport() == true)
     {
-        appDelegate.OPAYAuthController?.authDelegate = self
-        appDelegate.OPAYAuthController?.beginPayment(self, withRequestData: createDataDictionary(), withCartData: createCartData())
+        appDelegate.PaysafeAuthController?.authDelegate = self
+        appDelegate.PaysafeAuthController?.beginPayment(self, withRequestData: createDataDictionary(), withCartData: createCartData())
     }
     else
     {
         showAlertView("Alert", errorMessage: "Device does not support Apple Pay!")
         callNonApplePayFlow()
     }
-
 #endif
-        
-    
 }
     
     @IBAction func authorizeBtnSelected(sender:UIButton) {
-        
         let authObj:OPTAuthorizationProcess = OPTAuthorizationProcess()
         authObj.processDelegate = self
         authObj.prepareRequestForAuthorization(createAuthDataDictonary())
-        
     }
     
     
@@ -132,11 +126,9 @@ class TVViewController: UIViewController , UITextFieldDelegate, AuthorizationPro
     }
     
     func callBackResponseFromOptimalRequest(response: [NSObject : AnyObject]!) {
-        print("callBackResponseFromOptimalRequest")
+        print("callBackResponseFromPaysafeRequest")
         print(response)
-        
       //  let jsonResult = response as? Dictionary<String, AnyObject>
-        
     }
     
     func callBackAuthorizationProcess(dictonary: [NSObject : AnyObject]!) {
@@ -197,7 +189,7 @@ class TVViewController: UIViewController , UITextFieldDelegate, AuthorizationPro
         
         let enviDictionary: [String: String] = ["EnvType":envType, "TimeIntrval":timeIntrval]
         
-        let dataDictonary: [String: Dictionary] = ["ShippingMethod": shippingMethod1Dictionary,"EnvSettingDict": enviDictionary]
+        let dataDictonary: [String: Dictionary<String, String>] = ["ShippingMethod": shippingMethod1Dictionary,"EnvSettingDict": enviDictionary]
         
         return dataDictonary
     }
@@ -219,7 +211,6 @@ class TVViewController: UIViewController , UITextFieldDelegate, AuthorizationPro
     func showAlertView(errorCode:String, errorMessage:String){
         let alert = UIAlertView(title: errorCode, message: errorMessage, delegate: self, cancelButtonTitle: "OK")
         alert .show()
-        
     }
     
     @IBAction func isPurchase(sender:UISwitch){
@@ -240,18 +231,14 @@ class TVViewController: UIViewController , UITextFieldDelegate, AuthorizationPro
     func createAuthDataDictonary() -> Dictionary<String, AnyObject>{
         
         let tokenData: AnyObject = authorizationData["paymentToken"]!
-        
         let description: String = "Hand bag - Big"
-        
         let merchantRef: String! = merchantRefField?.text
         let merchantAmt: String! = amountField?.text
-        
         
         let cardDictonary: [String: AnyObject] = ["paymentToken":tokenData]
         let authDictonary: [String: AnyObject] = ["merchantRefNum":merchantRef, "amount":merchantAmt, "card":cardDictonary, "description":description, "customerIp":[self .getIPAddress()], "settleWithAuth":isOn]
         return authDictonary;
     }
-    
     
     func getIPAddress()->NSString{
         var ipAddress:NSString = ""
@@ -271,17 +258,14 @@ class TVViewController: UIViewController , UITextFieldDelegate, AuthorizationPro
                     }
             }
         }
-        
-        
         return ipAddress
     }
     
     func callNonApplePayFlow()
     {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("SWCreditCardViewController") 
-        self.presentViewController(vc, animated: true, completion: nil)
-     
+        let vc = storyboard.instantiateViewControllerWithIdentifier("SWCreditCardViewController")
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
      func callNonAppleFlowFromOPTSDK() {
@@ -289,8 +273,6 @@ class TVViewController: UIViewController , UITextFieldDelegate, AuthorizationPro
     }
     
     override func didReceiveMemoryWarning() {
-        
-        super.didReceiveMemoryWarning()
-        
+        super.didReceiveMemoryWarning()        
     }
 }

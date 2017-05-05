@@ -7,7 +7,7 @@
 //
 
 #import "CreditCardViewController.h"
-#import "AppConstants.h"
+//#import "Constant.h"
 
 @interface CreditCardViewController ()
 
@@ -24,10 +24,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.title=@"Non Apple Pay";
+
     // Do any additional setup after loading the view.
-    btnConfirm.layer.cornerRadius=10;
-    btnCancel.layer.cornerRadius=10;
+
     
     scrollView.contentSize=CGSizeMake(320,1500);
     txtCardNo.delegate=self;
@@ -40,7 +40,6 @@
     txtStreet2.delegate=self;
     txtZip.delegate=self;
     txtExpMonth.delegate=self;
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,11 +54,9 @@
 
 -(NSMutableDictionary *)createDataDictionary
 {
-    
     NSMutableDictionary *cardExpData= [[NSMutableDictionary alloc]init];
     [cardExpData setValue:txtExpMonth.text forKey:@"month"];
     [cardExpData setValue:txtExpYear.text forKey:@"year"];
-    
     
     NSMutableDictionary *cardBillingAddress= [[NSMutableDictionary alloc]init];
     
@@ -91,13 +88,13 @@
     
     NSMutableDictionary *envSettingDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:envType,@"EnvType",timeIntrval,@"TimeIntrval",nil];
     
-    self.OPAYAuthPaymentController.authDelegate = self;
-    if([self.OPAYAuthPaymentController respondsToSelector:@selector(beginNonApplePayment:withRequestData:withEnvSettingDict:)])
+    self.PaysafeAuthPaymentController.authDelegate = self;
+    if([self.PaysafeAuthPaymentController respondsToSelector:@selector(beginNonApplePayment:withRequestData:withEnvSettingDict:)])
     {
-        [self.OPAYAuthPaymentController beginNonApplePayment:self withRequestData:[self createDataDictionary] withEnvSettingDict:envSettingDict];
+        [self.PaysafeAuthPaymentController beginNonApplePayment:self withRequestData:[self createDataDictionary] withEnvSettingDict:envSettingDict];
     }
-    
 }
+
 - (void)getDataFromPlist
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"MerchantRealConfiguration" ofType:@"plist"];
@@ -110,15 +107,14 @@
     NSString *merchantCurrencyCode = [myDictionary objectForKey:@"CurrencyCode"];
     NSString *appleMerchantIdentifier = [myDictionary objectForKey:@"merchantIdentifier"];
     
-    self.OPAYAuthPaymentController = [[OPAYPaymentAuthorizationProcess alloc] initWithMerchantIdentifier:appleMerchantIdentifier withMerchantID:merchantUserID withMerchantPwd:merchantPassword withMerchantCountry:merchantCountryCode withMerchantCurrency:merchantCurrencyCode];
+    self.PaysafeAuthPaymentController = [[PaySafePaymentAuthorizationProcess alloc] initWithMerchantIdentifier:appleMerchantIdentifier withMerchantID:merchantUserID withMerchantPwd:merchantPassword withMerchantCountry:merchantCountryCode withMerchantCurrency:merchantCurrencyCode];
 }
 
 -(void)callBackResponseFromOPTSDK:(NSDictionary *)response
 {
-    
     [self callSplitResponse:response];
-    
 }
+
 -(void)callSplitResponse:(NSDictionary*)response
 {
     if(response)
@@ -132,7 +128,6 @@
             code=[errorDict objectForKey:@"code"];
             message=[errorDict objectForKey:@"message"];
             
-            
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:code message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
         }
@@ -140,26 +135,29 @@
         {
             tokenResponse = [NSDictionary dictionaryWithDictionary:response];
             
-            
             NSString *message = [NSString stringWithFormat:@"Your Payment Token is :: %@", [response objectForKey:@"paymentToken"]];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
-            
-            
         }
-    }else{
+    }
+    else
+    {
         //Error handling
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Error message" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
 }
 
--(IBAction)backPressed:(UIStoryboardSegue *)seque{
+-(IBAction)backPressed:(UIStoryboardSegue *)seque
+{
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 -(void)callNonAppleFlowFromOPTSDK
 {
+    
 }
+
 /*
  #pragma mark - Navigation
  

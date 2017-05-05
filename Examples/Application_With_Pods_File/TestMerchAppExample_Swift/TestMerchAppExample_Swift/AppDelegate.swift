@@ -12,20 +12,18 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-    var OPAYAuthController: OPAYPaymentAuthorizationProcess?
+    var PaysafeAuthController: PaySafePaymentAuthorizationProcess?
     var plistDataDictionary: AnyObject? = nil
     
-    
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool 
+    {
         // Override point for customization after application launch.
         
         self.loadDataFrmPlist()
-        
-        OPAYAuthController = OPAYPaymentAuthorizationProcess(merchantIdentifier: plistDataDictionary!["merchantIdentifier"]!  as? String, withMerchantID: plistDataDictionary!["OptiMerchantID"]!  as? String, withMerchantPwd: plistDataDictionary!["OptiMerchantPassword"]!  as? String, withMerchantCountry: plistDataDictionary!["countryCode"]!  as? String, withMerchantCurrency: plistDataDictionary!["CurrencyCode"]!  as? String)
-        
+
+        PaysafeAuthController = PaySafePaymentAuthorizationProcess(merchantIdentifier: plistDataDictionary!["merchantIdentifier"]!  as? String, withMerchantID: plistDataDictionary!["OptiMerchantID"]!  as? String, withMerchantPwd: plistDataDictionary!["OptiMerchantPassword"]!  as? String, withMerchantCountry: plistDataDictionary!["countryCode"]!  as? String, withMerchantCurrency: plistDataDictionary!["CurrencyCode"]!  as? String)
         return true
     }
-    
     
     func loadDataFrmPlist(){
         let documentList = NSBundle.mainBundle().pathForResource("MerchantRealConfiguration", ofType:"plist")

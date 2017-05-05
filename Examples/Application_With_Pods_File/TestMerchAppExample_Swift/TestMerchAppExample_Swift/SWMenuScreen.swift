@@ -11,38 +11,34 @@ import UIKit
 
 class SWMenuScreen :UIViewController
 {
-    
         @IBOutlet var applePayBtn : UIButton!
         @IBOutlet var nonApplePayBtn : UIButton!
-    
-    
-    
+        @IBOutlet var threeDSBtn : UIButton!
+        @IBOutlet var customerVaultPayBtn : UIButton! 
+        @IBOutlet var ddBtn : UIButton!
+        
     override func viewDidLoad()
     {
-        applePayBtn.layer.cornerRadius=10;
-        nonApplePayBtn.layer.cornerRadius=10;
+        self.title = "PaySafe"
     }
     
     @IBAction func applePayBtnSelected(sender:UIButton)
     {
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("Tvviewcontroller") 
-        self.presentViewController(vc, animated: true, completion: nil)
         
-        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     @IBAction func nonApplePayBtnSelected(sender:UIButton)
     {
-        
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("SWCreditCardViewController") 
-        self.presentViewController(vc, animated: true, completion: nil)
-        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
-    @IBAction func backPressed(x:UIStoryboardSegue) {
+    @IBAction func backPressed(x:UIStoryboardSegue) 
+    {
         self.navigationController?.popViewControllerAnimated(true)
     }
 

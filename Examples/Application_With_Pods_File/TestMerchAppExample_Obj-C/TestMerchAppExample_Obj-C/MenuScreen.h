@@ -10,12 +10,17 @@
 #import <UIKit/UIKit.h>
 #import "HomeViewController.h"
 
-@interface MenuScreen : UIViewController
+@interface MenuScreen : UIViewController 
 
 @property(retain,nonatomic) IBOutlet UIButton *btnApplePay;
 @property(retain,nonatomic) IBOutlet UIButton *btnNonApplePay;
 
 @property (nonatomic, retain) HomeViewController *homeController;
 
+@property (nonatomic, retain) NSMutableData *responseData;
+
+- (IBAction)btnAccountOperationsAction:(id)sender;
+
+- (IBAction)btnPurchaseOperationsAction:(id)sender;
 
 @end

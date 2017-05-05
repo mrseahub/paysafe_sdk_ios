@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class SWCreditCardViewController :UIViewController ,UITextFieldDelegate,OPAYPaymentAuthorizationProcessDelegate
+class SWCreditCardViewController :UIViewController ,UITextFieldDelegate,PaysafePaymentAuthorizationProcessDelegate
 {
     @IBOutlet var  scrollView :UIScrollView!
     @IBOutlet var  txtCardNo:UITextField!
@@ -27,7 +27,7 @@ class SWCreditCardViewController :UIViewController ,UITextFieldDelegate,OPAYPaym
     
     @IBOutlet var  btnConfirm:UIButton!
     @IBOutlet var  btnCancel:UIButton!
-    @IBOutlet var  btnBack:UIButton!
+
     
     var  amount:NSString!
     
@@ -37,12 +37,8 @@ class SWCreditCardViewController :UIViewController ,UITextFieldDelegate,OPAYPaym
     {
         super.viewDidLoad()
         
-        
+        self.title = "Non Apple Pay"
         scrollView.contentSize = CGSize(width:320, height:1200)
-        
-        btnConfirm.layer.cornerRadius=10;
-        btnCancel.layer.cornerRadius=10;
-        
         self.txtCardNo!.delegate = self
         self.txtExpMonth!.delegate = self
         self.txtExpYear!.delegate = self
@@ -53,12 +49,10 @@ class SWCreditCardViewController :UIViewController ,UITextFieldDelegate,OPAYPaym
         self.txtCountry!.delegate = self
         self.txtState!.delegate = self
         self.txtZip!.delegate = self
-        
     }
     
     func createDataDictionary() -> Dictionary <String , AnyObject>
     {
-        
         var cardExpData = Dictionary<String, AnyObject>()
         cardExpData["month"] = txtExpMonth.text
         cardExpData["year"] = txtExpYear.text
@@ -79,7 +73,6 @@ class SWCreditCardViewController :UIViewController ,UITextFieldDelegate,OPAYPaym
         cardData["cardExpiry"]=cardExpData
         cardData["billingAddress"]=cardBillingAddress
         
-        
          var cardDataDetails = Dictionary<String, AnyObject>()
          cardDataDetails["card"] = cardData
         
@@ -88,29 +81,25 @@ class SWCreditCardViewController :UIViewController ,UITextFieldDelegate,OPAYPaym
     
     @IBAction func confirmBtnSelected(sender:UIButton)
     {
-        
         let envType:String = "TEST_ENV";  //PROD_ENV TEST_ENV
         
         let timeIntrval:String = "30.0";  //Time interval for connection to Optimal server
         
         let enviDictionary: [String: String] = ["EnvType":envType, "TimeIntrval":timeIntrval]
         
-        appDelegate.OPAYAuthController?.authDelegate=self
+        appDelegate.PaysafeAuthController?.authDelegate=self
         
         
-        if (appDelegate.OPAYAuthController?.respondsToSelector(Selector("beginNonApplePayment:withRequestData:withEnvSettingDict:")) != nil)
+        if (appDelegate.PaysafeAuthController?.respondsToSelector(Selector("beginNonApplePayment:withRequestData:withEnvSettingDict:")) != nil)
         {
-            appDelegate.OPAYAuthController?.beginNonApplePayment(self, withRequestData: createDataDictionary(), withEnvSettingDict: enviDictionary)
+            appDelegate.PaysafeAuthController?.beginNonApplePayment(self, withRequestData: createDataDictionary(), withEnvSettingDict: enviDictionary)
         }
     }
     
-    
-    
     override func didReceiveMemoryWarning() {
-        
         super.didReceiveMemoryWarning()
-        
     }
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.view.endEditing(true);
         return false
@@ -128,18 +117,13 @@ class SWCreditCardViewController :UIViewController ,UITextFieldDelegate,OPAYPaym
                         errorCode = nameString
                     }
                 }
-                
-                
+            
                 if let errCode: AnyObject = nameObject["message"]{
                     if let nameString = errCode as? String {
                         errorMsg = nameString
                     }
                 }
-                
-                
                 self .showAlertView(errorCode, errorMessage: errorMsg)
-                
-                
             }
             else{
                 
