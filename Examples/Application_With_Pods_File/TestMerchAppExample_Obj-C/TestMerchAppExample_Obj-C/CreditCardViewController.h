@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "HomeViewController.h"
 #import <Foundation/Foundation.h>
-#import <iOS_SDK/PaySafePaymentAuthorizationProcess.h>
+#import <iOS_SDK/OPAYPaymentAuthorizationProcess.h>
 
 
-@interface CreditCardViewController : UIViewController <UITextFieldDelegate,PaysafePaymentAuthorizationProcessDelegate>
+@interface CreditCardViewController : UIViewController <UITextFieldDelegate,OPAYPaymentAuthorizationProcessDelegate>
 {
 
 }
@@ -34,8 +34,8 @@
 @property(retain,nonatomic) IBOutlet UIButton *btnCancel;
 @property(retain,nonatomic) IBOutlet UIButton *btnBack;
 
-@property(retain,nonatomic) NSString *amount;                     
-@property (nonatomic, retain) PaySafePaymentAuthorizationProcess *PaysafeAuthPaymentController;
+@property(retain,nonatomic) NSString *amount;
+@property (nonatomic, retain) OPAYPaymentAuthorizationProcess *OPAYAuthPaymentController;
 @property (nonatomic, retain) NSDictionary *tokenResponse;
 
 -(IBAction)callToSDKforSIngleUseToken:(id)sender;

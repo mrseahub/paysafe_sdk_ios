@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define BaseUrl @"https://api.test.paysafe.com"  //Base url
+#define BaseUrl @"https://api.test.netbanx.com"  //Base url
 
 @interface AppConstants : NSObject
 

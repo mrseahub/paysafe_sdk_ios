@@ -24,12 +24,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title=@"Apple Pay";
+    
     // Do any additional setup after loading the view.
+    btnBack.layer.cornerRadius = 10;
     
     [self getDataFromPlist];
     
-    if (!([self.PaysafeAuthController isApplePaySupport])) {
+    if (!([self.OPAYAuthController isApplePaySupport])) {
         [self.payButton setImage:[UIImage imageNamed:@"payNow_img.png"] forState:UIControlStateNormal];
     }
     
@@ -38,19 +39,26 @@
     amountTxt.delegate = self;
     
     authButton.hidden = true;
+    
 }
 
 - (void)getDataFromPlist
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"MerchantRealConfiguration" ofType:@"plist"];
+    
     NSMutableDictionary *myDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
+    
     NSString *merchantUserID = [myDictionary objectForKey:@"OptiMerchantID"];
+    
     NSString *merchantPassword =[myDictionary objectForKey:@"OptiMerchantPassword"];
+    
     NSString *merchantCountryCode = [myDictionary objectForKey:@"countryCode"];
+    
     NSString *merchantCurrencyCode = [myDictionary objectForKey:@"CurrencyCode"];
+    
     NSString *appleMerchantIdentifier = [myDictionary objectForKey:@"merchantIdentifier"];
     
-    self.PaysafeAuthController = [[PaySafePaymentAuthorizationProcess alloc] initWithMerchantIdentifier:appleMerchantIdentifier withMerchantID:merchantUserID withMerchantPwd:merchantPassword withMerchantCountry:merchantCountryCode withMerchantCurrency:merchantCurrencyCode];
+    self.OPAYAuthController = [[OPAYPaymentAuthorizationProcess alloc] initWithMerchantIdentifier:appleMerchantIdentifier withMerchantID:merchantUserID withMerchantPwd:merchantPassword withMerchantCountry:merchantCountryCode withMerchantCurrency:merchantCurrencyCode];
 }
 
 
@@ -64,15 +72,14 @@
         [alert show];
         return;
     }
-    
 #if TARGET_IPHONE_SIMULATOR
     
-    self.PaysafeAuthController.authDelegate = self;
-    [self.PaysafeAuthController beginPayment:self withRequestData:[self createDataDictionary] withCartData:[self cartData]];
+    self.OPAYAuthController.authDelegate = self;
+    [self.OPAYAuthController beginPayment:self withRequestData:[self createDataDictionary] withCartData:[self cartData]];
     
     
 #else
-    if([self.PaysafeAuthController isApplePaySupport]==false)
+    if([self.OPAYAuthController isApplePaySupport]==false)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
                                                         message:@"Device does not support Apple Pay!"
@@ -80,14 +87,20 @@
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];
         [alert show];
+
         [self callNonApplePayFlow];
 
     } else
     {
-        self.PaysafeAuthController.authDelegate = self;
-       [self.PaysafeAuthController beginPayment:self withRequestData:[self createDataDictionary] withCartData:[self cartData]];
+        
+        self.OPAYAuthController.authDelegate = self;
+       [self.OPAYAuthController beginPayment:self withRequestData:[self createDataDictionary] withCartData:[self cartData]];
+                
     }
+
+    
 #endif
+    
 }
 
 -(IBAction)authorizeBtnSelected:(id)sender{
@@ -95,8 +108,9 @@
     self.OPTAuthObj = [[OPTAuthorizationProcess alloc] init];
     self.OPTAuthObj.processDelegate = self;
     [self.OPTAuthObj prepareRequestForAuthorization:[self createAuthDataDictonary]];
+    
+    
 }
-
 /* --------------- Creating data dictionaries -------------- */
 
 
@@ -108,17 +122,20 @@
     
     NSDictionary *shippingMethod = [NSDictionary dictionaryWithObjectsAndKeys:shippingMethodName,@"shippingName",shippingMethodAmount,@"shippingAmount", shippingMethodDescription,@"shippingDes", nil];
     
+    
     NSString *envType = @"TEST_ENV";  //PROD_ENV TEST_ENV
     NSString *timeIntrval = @"30.0";
     
     NSDictionary *envSettingDict = [NSDictionary dictionaryWithObjectsAndKeys:envType,@"EnvType",timeIntrval,@"TimeIntrval",nil];
     
     NSMutableDictionary *finalDataDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:shippingMethod, @"ShippingMethod",envSettingDict,@"EnvSettingDict", nil ];
+    
+    
     return finalDataDictionary;
 }
 
--(NSDictionary*)cartData
-{
+-(NSDictionary*)cartData{
+    
     // Merchant Cart data
     
     NSString *cartID =@"123423";
@@ -130,14 +147,17 @@
     
     NSDictionary *cartDictonary = [NSDictionary dictionaryWithObjectsAndKeys:cartID,@"CartID",cartTitle,@"CartTitle",cartCost,@"CartCost",cartDiscount, @"CartDiscount", cartShippingCost,@"CartShippingCost" , payTo, @"PayTo", nil];
 
+    
     return cartDictonary;
 }
+
 
 /* ----- OPTPaymentAuthorizationViewControllerDelegate ---- */
 #pragma mark OPTPaymentAuthorizationViewControllerDelegate
  
 -(void)callBackResponseFromOPTSDK:(NSDictionary*)response
 {
+
     if(response)
     {
         NSDictionary *errorDict=[response objectForKey:@"error"];
@@ -149,17 +169,22 @@
             code=[errorDict objectForKey:@"code"];
             message=[errorDict objectForKey:@"message"];
             
+            
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:code message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
         }
         else
         {
             tokenResponse = [NSDictionary dictionaryWithDictionary:response];
+            
+            
             NSString *message = [NSString stringWithFormat:@"Your Payment Token is :: %@", [response objectForKey:@"paymentToken"]];
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alert show];
             
             authButton.hidden = false;
+            
+            
         }
     }else{
         //Error handling
@@ -167,11 +192,12 @@
         [alert show];
     }
 }
-
 -(void)callNonAppleFlowFromOPTSDK
 {
     [self callNonApplePayFlow];
+
 }
+
 
 -(void)callBackAuthorizationProcess:(NSDictionary*)dictonary{
     
@@ -203,7 +229,6 @@
         }
     }
 }
-
 -(void)showAlert:(NSString*)code message:(NSString *)message
 {
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:code
@@ -211,8 +236,8 @@
                                                    delegate:self cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil, nil];
     [alert show];
-}
 
+}
 -(NSDictionary *)createAuthDataDictonary{
     
     NSDictionary *txnDic = tokenResponse[@"transaction"];
@@ -234,6 +259,7 @@
         
     return authDictonary;
 }
+
 
 - (IBAction)switchToggled:(id)sender {
     UISwitch *mySwitch = (UISwitch *)sender;
@@ -263,13 +289,13 @@
 
 -(void)callNonApplePayFlow
 {
+    
     CreditCardViewController *creditCardViewController=[[CreditCardViewController alloc]init];
     creditCardViewController.amount=amountTxt.text;
-    creditCardViewController.PaysafeAuthPaymentController = self.PaysafeAuthController;
-   
+    creditCardViewController.OPAYAuthPaymentController=self.OPAYAuthController;
     UIStoryboard *storyboard = self.storyboard;
     creditCardViewController = [storyboard instantiateViewControllerWithIdentifier:@"CreditCardViewController"];
-    [self.navigationController pushViewController:creditCardViewController animated:YES];
+    [self presentViewController:creditCardViewController animated:YES completion:nil];
 }
 
 -(void)getTokenUseingCard:(NSDictionary *)response
