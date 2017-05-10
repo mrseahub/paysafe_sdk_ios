@@ -1,5 +1,1 @@
-target "TestMerchAppExample_Obj-C" do
-    
-    pod 'Paysafe', '~> 1.2.0'
-    
-end
+pod 'OptimalPayments'
