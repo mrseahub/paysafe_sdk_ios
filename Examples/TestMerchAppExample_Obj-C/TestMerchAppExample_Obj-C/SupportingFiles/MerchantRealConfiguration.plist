@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>merchant_api_key_password</key>
+	<string></string>
+	<key>merchant_api_key_id</key>
+	<string></string>
+	<key>merchant_country_code</key>
+	<string></string>
+	<key>merchant_currency_code</key>
+	<string></string>
+	<key>merchant_account_number</key>
+	<string></string>
+	<key>merchant_identifier</key>
+	<string></string>
+	<key>enviornmentType</key>
+	<string>TEST_ENV</string>
+	<key>timeInterval</key>
+	<string>30</string>
+</dict>
+</plist>
