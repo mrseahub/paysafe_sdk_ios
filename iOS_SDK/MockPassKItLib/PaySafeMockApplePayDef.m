@@ -81,8 +81,6 @@ NSString * const url_fake_apple_token = @"https://api.test.paysafe.com/customerv
 {
     selectedCardNumber=value;
 }
-<<<<<<< HEAD
-=======
 +(NSString*)envType {
     
     return envType;
@@ -117,7 +115,6 @@ NSString * const url_fake_apple_token = @"https://api.test.paysafe.com/customerv
 }
 
 
->>>>>>> apple-paysafe
 
 +(void)OPAYLog:(NSString*)functionName returnMessage:(id)message;
 {

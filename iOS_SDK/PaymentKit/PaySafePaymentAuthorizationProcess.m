@@ -14,24 +14,15 @@
 #import "PaySafeRequestApplePaySingleUseTokens.h"
 #import "PaySafeMockPaymentAuthorizationProcess.h"
 #import "PaySafeConstants.h"
-<<<<<<< HEAD
-=======
 #import <iOS_SDK/WebServiceHandler.h>
->>>>>>> apple-paysafe
 
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 
 
-<<<<<<< HEAD
-@interface PaySafePaymentAuthorizationProcess ()  <UIViewControllerTransitioningDelegate,NSURLConnectionDelegate,PKPaymentAuthorizationViewControllerDelegate,OPAYMockPaymentAuthorizationProcessDelegate>
-{
-    NSURLConnection *connection;
-=======
 @interface PaySafePaymentAuthorizationProcess ()  <UIViewControllerTransitioningDelegate,PKPaymentAuthorizationViewControllerDelegate,OPAYMockPaymentAuthorizationProcessDelegate>
 {
->>>>>>> apple-paysafe
     
     NSDictionary *merchantCartDictonary;
     NSDictionary *shippingMethodData;
@@ -62,25 +53,14 @@
 @synthesize activityIndicator,optViewController,testPaymentAuthorizationProcess;
 
 
-<<<<<<< HEAD
-- (id)initWithMerchantIdentifier:(NSString*)merchantIdentifier withMerchantID:(NSString*)optiMerchantID withMerchantPwd:(NSString*)optiMerchantPwd withMerchantCountry:(NSString*)merchantCountry withMerchantCurrency:(NSString*)merchantCurrency
-{
-=======
 
 
 
 - (id)initWithMerchantIdentifier:(NSString*)merchantIdentifier withMerchantID:(NSString*)optiMerchantID withMerchantPwd:(NSString*)optiMerchantPwd withMerchantCountry:(NSString*)merchantCountry withMerchantCurrency:(NSString*)merchantCurrency withEnviornmentType:(NSString *)enviornmentType withMerchantAuthID:(NSString *)merchantAuthID withMerchantAuthPassword:(NSString*)merchantAuthPassword withMerchantAccountNumber:(NSString *)merchantAccountNumber{
->>>>>>> apple-paysafe
     // Set the data for all objects !!!
     
     PaySafeDef.merchantUserID=optiMerchantID;
     PaySafeDef.merchantPassword=optiMerchantPwd;
-<<<<<<< HEAD
-    
-    PaySafeDef.merchantIdentifier=merchantIdentifier;
-    PaySafeDef.countryCode=merchantCountry;
-    PaySafeDef.currencyCode=merchantCurrency;
-=======
     PaySafeDef.merchantIdentifier=merchantIdentifier;
     PaySafeDef.countryCode=merchantCountry;
     PaySafeDef.currencyCode=merchantCurrency;
@@ -89,16 +69,12 @@
     PaySafeDef.merchantAuthPassword=merchantAuthPassword;
     PaySafeDef.merchantAccountNo = merchantAccountNumber;
     
->>>>>>> apple-paysafe
     
     return self;
 }
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> apple-paysafe
 - (BOOL)isApplePaySupport
 {
     /* If we are running the app in Device this method retuns TRUE.
@@ -316,78 +292,6 @@
     NSString *userIDPassword= [NSString stringWithFormat:@"%@:%@", PaySafeDef.merchantUserID, PaySafeDef.merchantPassword];
     NSData *plainData = [userIDPassword dataUsingEncoding:NSUTF8StringEncoding];
     NSString *base64String = [plainData base64EncodedStringWithOptions:0];
-<<<<<<< HEAD
-    
-    NSString *authorizationField= [NSString stringWithFormat: @"Basic %@", base64String];
-    
-    double timeIntervel=[PaySafeDef.timeInterval doubleValue];
-    
-    if ([serviceName isEqualToString:SingleUserTokneServiceRequest])
-    {
-        
-        // JSON POST TO SERVER
-        NSString *urlString = [NSString stringWithFormat:@"%@/customervault/v1/applepaysingleusetokens",[PaySafeDef getOptimalUrl]];
-        
-        NSURL *projectsUrl = [NSURL  URLWithString:urlString];
-        
-        NSMutableURLRequest *dataSubmit = [NSMutableURLRequest requestWithURL:projectsUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:timeIntervel];
-        [dataSubmit setHTTPMethod:@"POST"]; // 1
-        [dataSubmit setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [dataSubmit setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[self.paymentTokenData length]] forHTTPHeaderField:@"Content-Length"];
-        [dataSubmit setValue:authorizationField forHTTPHeaderField:@"Authorization"];
-        [dataSubmit setHTTPBody:self.paymentTokenData];
-        connection = [[NSURLConnection alloc]initWithRequest:dataSubmit delegate:self];
-        
-        self.responseData=[NSMutableData data];
-    }
-    else if ([serviceName isEqualToString:NonApplePaySingleUserTokneServiceRequest])
-    {
-        // JSON POST TO SERVER
-        NSString *urlString = [NSString stringWithFormat:@"%@/customervault/v1/singleusetokens",[PaySafeDef getOptimalUrl]];
-        NSURL *projectsUrl = [NSURL  URLWithString:urlString];
-        
-        NSMutableURLRequest *dataSubmit = [NSMutableURLRequest requestWithURL:projectsUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:timeIntervel];
-        [dataSubmit setHTTPMethod:@"POST"]; // 1
-        [dataSubmit setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-        [dataSubmit setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[self.paymentTokenData length]] forHTTPHeaderField:@"Content-Length"];
-        [dataSubmit setValue:authorizationField forHTTPHeaderField:@"Authorization"];
-        [dataSubmit setHTTPBody:self.paymentTokenData];
-        connection = [[NSURLConnection alloc]initWithRequest:dataSubmit delegate:self];
-        
-        self.responseData=[NSMutableData data];
-    }
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    [self.responseData setLength:0];
-    
-    NSHTTPURLResponse *httpResponse =(NSHTTPURLResponse *)response;
-    [PaySafeDef OPAYLog:@"Response Headers::" returnMessage:[httpResponse allHeaderFields]];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    
-    [self.responseData appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    
-    NSDictionary *res = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&error];
-    [self hideActivityViewer];
-    [self.authDelegate callBackResponseFromOPTSDK:res];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    
-    // convert to JSON
-    NSError *myError = nil;
-    NSDictionary *res = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
-    
-    [self hideActivityViewer];
-    [self.authDelegate callBackResponseFromOPTSDK:res];
-}
-
-=======
     NSString *authorizationField= [NSString stringWithFormat: @"Basic %@", base64String];
     
     
@@ -422,7 +326,6 @@
 }
 
 
->>>>>>> apple-paysafe
 - (void)callBackResponseFromOPAYMockSDK:(NSDictionary*)response
 {
     [self.authDelegate callBackResponseFromOPTSDK:response];

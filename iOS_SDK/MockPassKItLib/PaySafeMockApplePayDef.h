@@ -19,8 +19,6 @@ static NSDictionary *responseData;
 static NSString *countryCode;
 static NSString *currencyCode;
 static NSString *selectedCardNumber;
-<<<<<<< HEAD
-=======
 static NSString *envType;
 static NSString *merchantAuthID;
 static NSString *merchantAuthPassword;
@@ -30,7 +28,6 @@ static NSString *merchantAccountNo;
 
 
 
->>>>>>> apple-paysafe
 
 @interface PaySafeMockApplePayDef : NSObject
 
@@ -60,8 +57,6 @@ static NSString *merchantAccountNo;
 + (NSString*) selectedCardNumber;
 + (void) setSelectedCardNumber:(NSString*)value;
 
-<<<<<<< HEAD
-=======
 +(NSString*)envType;
 +(void)setEnvType:(NSString *)value;
 
@@ -78,5 +73,4 @@ static NSString *merchantAccountNo;
 
 
 
->>>>>>> apple-paysafe
 @end

@@ -57,20 +57,12 @@
 // This method will call thenon apple flow from merchant app.
 @end;
 
-<<<<<<< HEAD
-@interface PaySafePaymentAuthorizationProcess : NSObject <NSURLConnectionDelegate,PKPaymentAuthorizationViewControllerDelegate>
-=======
 @interface PaySafePaymentAuthorizationProcess : NSObject <PKPaymentAuthorizationViewControllerDelegate>
->>>>>>> apple-paysafe
 
 @property(nonatomic, assign)id<OPAYPaymentAuthorizationProcessDelegate>authDelegate;
 
 
-<<<<<<< HEAD
-- (id)initWithMerchantIdentifier:(NSString*)merchantIdentifier withMerchantID:(NSString*)optiMerchantID withMerchantPwd:(NSString*)optiMerchantPwd withMerchantCountry:(NSString*)merchantCountry withMerchantCurrency:(NSString*)merchantCurrency;
-=======
 - (id)initWithMerchantIdentifier:(NSString*)merchantIdentifier withMerchantID:(NSString*)optiMerchantID withMerchantPwd:(NSString*)optiMerchantPwd withMerchantCountry:(NSString*)merchantCountry withMerchantCurrency:(NSString*)merchantCurrency withEnviornmentType:(NSString *)enviornmentType withMerchantAuthID:(NSString *)merchantAuthID withMerchantAuthPassword:(NSString*)merchantAuthPassword withMerchantAccountNumber:(NSString *)merchantAccountNumber;
->>>>>>> apple-paysafe
 
 - (void)beginPayment:(UIViewController *)viewController withRequestData:(NSDictionary*)dataDictionary withCartData:(NSDictionary*)cartData;
 
@@ -109,8 +101,4 @@
 // NO, if the user doesn't have valid/verified card payment networks.
 //- (BOOL)canMakePayments;
 
-<<<<<<< HEAD
 @end
-=======
-@end
->>>>>>> apple-paysafe
