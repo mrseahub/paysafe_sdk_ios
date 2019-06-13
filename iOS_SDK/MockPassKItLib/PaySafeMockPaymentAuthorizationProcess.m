@@ -13,6 +13,7 @@
 #import "PaySafeMockCardStore.h"
 #import "PaySafeMockShippingManager.h"
 #import <iOS_SDK/WebServiceHandler.h>
+#import <iOS_SDK/PaySafeDef.h>
 
 #define FAKE_APPLE_TOKE_SERVICE @"FakeApplePayTokenService"
 #define FAKE_SINGLE_USE_TOKEN @"FakeSingleUseTOkenService"
@@ -56,16 +57,19 @@
     return true;
 }
 
-- (id)initWithMerchantIdentifier:(NSString*)merchantIdentifier withMerchantID:(NSString*)optiMerchantID withMerchantPwd:(NSString*)optiMerchantPwd withMerchantCountry:(NSString*)merchantCountry withMerchantCurrency:(NSString*)merchantCurrency
-{
+- (id)initWithMerchantIdentifier:(NSString*)merchantIdentifier withMerchantID:(NSString*)optiMerchantID withMerchantPwd:(NSString*)optiMerchantPwd withMerchantCountry:(NSString*)merchantCountry withMerchantCurrency:(NSString*)merchantCurrency withEnviornmentType:(NSString *)enviornmentType withMerchantAuthID:(NSString *)merchantAuthID withMerchantAuthPassword:(NSString*)merchantAuthPassword withMerchantAccountNumber:(NSString *)merchantAccountNumber{
     // Set the data for all objects !!!
     
     PaySafeMockApplePayDef.merchantUserID=optiMerchantID;
     PaySafeMockApplePayDef.merchantPassword=optiMerchantPwd;
-    
     PaySafeMockApplePayDef.merchantIdentifier=merchantIdentifier;
     PaySafeMockApplePayDef.countryCode=merchantCountry;
     PaySafeMockApplePayDef.currencyCode=merchantCurrency;
+    PaySafeMockApplePayDef.envType = enviornmentType;
+    PaySafeMockApplePayDef.merchantAuthID =merchantAuthID;
+    PaySafeMockApplePayDef.merchantAuthPassword = merchantAuthPassword;
+    PaySafeMockApplePayDef.merchantAccountNo =merchantAccountNumber;
+    //PaySafeMockApplePayDef.
     return self;
 }
 
@@ -167,7 +171,7 @@
 -(NSData *)getCardDetails:(PKPayment *)payment
 {
     NSString *accountNumbar =PaySafeMockApplePayDef.selectedCardNumber;//payment.opt_testCardNumber;
-    NSString *accountExpiry = @"181231";
+    NSString *accountExpiry = @"221231";
     NSString *amount = [merchantCartDictonary valueForKey:@"CartCost"];
     NSString *cardHolderName = @"Bill Gates";
     
@@ -192,13 +196,12 @@
      NSData *postData;
     if ([requestServiceName isEqualToString:FAKE_APPLE_TOKE_SERVICE]) {
         [self showActivityViewer];
-        projectsUrl = url_fake_apple_token;
-        
-        
+        projectsUrl = [NSString stringWithFormat:@"%@/customervault/v1/applepaysingleusetokens/faketoken/simple",[PaySafeDef getOptimalUrl]];
         postData = cardData;
     }
     else if([requestServiceName isEqualToString:FAKE_SINGLE_USE_TOKEN]) {
-        projectsUrl = url_single_user_token;
+        projectsUrl = [NSString stringWithFormat:@"%@/customervault/v1/applepaysingleusetokens",[PaySafeDef getOptimalUrl]];
+
         postData = fakeTokenData;
 
     }

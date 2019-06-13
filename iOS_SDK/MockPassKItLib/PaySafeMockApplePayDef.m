@@ -81,6 +81,38 @@ NSString * const url_fake_apple_token = @"https://api.test.paysafe.com/customerv
 {
     selectedCardNumber=value;
 }
++(NSString*)envType {
+    
+    return envType;
+}
++(void)setEnvType:(NSString *)value {
+    envType = value;
+}
++(NSString*)merchantAuthID {
+    
+    return merchantAuthID;
+}
++(void)setMerchantAuthID:(NSString *)ID {
+    merchantAuthID = ID;
+}
+
++(NSString*)merchantAuthPassword {
+    
+    return merchantAuthPassword;
+}
++(void)setMerchantAuthPassword:(NSString *)Password  {
+    merchantAuthPassword = Password;
+}
+
++ (NSString*) merchantAccountNo
+{
+    return merchantAccountNo;
+}
+
++ (void) setMerchantAccountNo:(NSString*)value
+{
+    merchantAccountNo = value;
+}
 
 
 

@@ -57,12 +57,9 @@
     
         NSString *apiName = @"authorizations";
     
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"MerchantRealConfiguration" ofType:@"plist"];
-        NSMutableDictionary *myDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
+        NSString *urlString = [NSString stringWithFormat:@"%@/cardpayments/v1/accounts/%@/auths",[PaySafeDef getOptimalUrl],PaySafeDef.merchantAccountNo];
     
-        NSString *urlString = [NSString stringWithFormat:@"%@/cardpayments/v1/accounts/%@/auths",BaseUrl,[myDictionary objectForKey:@"merchant_account_number"]];
-    
-        NSString *userIDPassword= [NSString stringWithFormat:@"%@:%@", [myDictionary objectForKey:@"merchant_api_key_id"], [myDictionary objectForKey:@"merchant_api_key_password"]];
+        NSString *userIDPassword= [NSString stringWithFormat:@"%@:%@",PaySafeDef.merchantAuthID,PaySafeDef.merchantAuthPassword];
         NSData *plainData = [userIDPassword dataUsingEncoding:NSUTF8StringEncoding];
         NSString *base64String = [plainData base64EncodedStringWithOptions:0];
     

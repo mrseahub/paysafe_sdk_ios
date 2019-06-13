@@ -18,5 +18,9 @@
 	<string>TEST_ENV</string>
 	<key>timeInterval</key>
 	<string>30</string>
+	<key>merchant_api_key_id_auth</key>
+	<string></string>
+	<key>merchant_api_key_password_auth</key>
+	<string></string>
 </dict>
 </plist>

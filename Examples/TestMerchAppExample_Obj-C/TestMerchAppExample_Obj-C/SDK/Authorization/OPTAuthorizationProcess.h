@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <iOS_SDK/WebServiceHandler.h>
+#import <iOS_SDK/PaySafeDef.h>
 
 
 @protocol AuthorizationProcessDelegate <NSObject>

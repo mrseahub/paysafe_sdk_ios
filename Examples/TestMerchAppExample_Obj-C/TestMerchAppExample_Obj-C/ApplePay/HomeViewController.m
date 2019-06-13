@@ -50,8 +50,15 @@
     NSString *merchantCountryCode = [myDictionary objectForKey:@"merchant_country_code"];
     NSString *merchantCurrencyCode = [myDictionary objectForKey:@"merchant_currency_code"];
     NSString *appleMerchantIdentifier = [myDictionary objectForKey:@"merchant_identifier"];
+    NSString *merchantAuthID = [myDictionary objectForKey:@"merchant_api_key_id_auth"];
+    NSString *merchantAuthPassword = [myDictionary objectForKey:@"merchant_api_key_password_auth"];
+    NSString *envType = [myDictionary objectForKey:@"enviornmentType"];
+    NSString *merchantAccountNumber = [myDictionary objectForKey:@"merchant_account_number"];
+
+
     
-    self.PaysafeAuthController = [[PaySafePaymentAuthorizationProcess alloc] initWithMerchantIdentifier:appleMerchantIdentifier withMerchantID:merchantUserID withMerchantPwd:merchantPassword withMerchantCountry:merchantCountryCode withMerchantCurrency:merchantCurrencyCode];
+    self.PaysafeAuthController = [[PaySafePaymentAuthorizationProcess alloc]initWithMerchantIdentifier:appleMerchantIdentifier withMerchantID:merchantUserID withMerchantPwd:merchantPassword withMerchantCountry:merchantCountryCode withMerchantCurrency:merchantCurrencyCode withEnviornmentType:envType withMerchantAuthID:merchantAuthID withMerchantAuthPassword:merchantAuthPassword withMerchantAccountNumber:merchantAccountNumber];
+    
 }
 
 -(BOOL)validateCredentials {

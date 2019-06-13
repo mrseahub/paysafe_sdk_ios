@@ -26,7 +26,7 @@
 		17FC3E2622648833008FFE47 /* WebServiceHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = 17FC3E2422648833008FFE47 /* WebServiceHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD805E5B1BC79EF800D8FFE8 /* PaySafeApplePayPaymentTokenInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = AD805E531BC79EF800D8FFE8 /* PaySafeApplePayPaymentTokenInfo.h */; };
 		AD805E5C1BC79EF800D8FFE8 /* PaySafeApplePayPaymentTokenInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AD805E541BC79EF800D8FFE8 /* PaySafeApplePayPaymentTokenInfo.m */; };
-		AD805E5D1BC79EF800D8FFE8 /* PaySafeDef.h in Headers */ = {isa = PBXBuildFile; fileRef = AD805E551BC79EF800D8FFE8 /* PaySafeDef.h */; };
+		AD805E5D1BC79EF800D8FFE8 /* PaySafeDef.h in Headers */ = {isa = PBXBuildFile; fileRef = AD805E551BC79EF800D8FFE8 /* PaySafeDef.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AD805E5E1BC79EF800D8FFE8 /* PaySafeDef.m in Sources */ = {isa = PBXBuildFile; fileRef = AD805E561BC79EF800D8FFE8 /* PaySafeDef.m */; };
 		AD805E5F1BC79EF800D8FFE8 /* PaySafePayment.h in Headers */ = {isa = PBXBuildFile; fileRef = AD805E571BC79EF800D8FFE8 /* PaySafePayment.h */; };
 		AD805E601BC79EF800D8FFE8 /* PaySafePayment.m in Sources */ = {isa = PBXBuildFile; fileRef = AD805E581BC79EF800D8FFE8 /* PaySafePayment.m */; };
@@ -226,12 +226,12 @@
 				AD805E5B1BC79EF800D8FFE8 /* PaySafeApplePayPaymentTokenInfo.h in Headers */,
 				ADD9C2201BC79E1300981AB7 /* PaySafeMockPayment.h in Headers */,
 				17FC3E2622648833008FFE47 /* WebServiceHandler.h in Headers */,
+				AD805E5D1BC79EF800D8FFE8 /* PaySafeDef.h in Headers */,
 				ADD9C1AD1BC7989B00981AB7 /* PaySafePaymentAuthorizationProcess.h in Headers */,
 				ADD9C22C1BC79E3400981AB7 /* PaySafeMockPaymentSummaryViewController.xib in Headers */,
 				ADD9C2191BC79E1300981AB7 /* PaySafeMockApplePayDef.h in Headers */,
 				ADD9C2171BC79E1300981AB7 /* PaySafeMockAddressStore.h in Headers */,
 				ADD9C2261BC79E1300981AB7 /* PaySafeMockShippingManager.h in Headers */,
-				AD805E5D1BC79EF800D8FFE8 /* PaySafeDef.h in Headers */,
 				ADD9C2241BC79E1300981AB7 /* PaySafeMockPaymentSummaryViewController.h in Headers */,
 				ADD9C21B1BC79E1300981AB7 /* PaySafeMockCardStore.h in Headers */,
 				ADD9C1A91BC7985D00981AB7 /* PaySafeConstants.h in Headers */,

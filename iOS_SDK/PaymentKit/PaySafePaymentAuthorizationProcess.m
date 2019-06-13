@@ -53,19 +53,27 @@
 @synthesize activityIndicator,optViewController,testPaymentAuthorizationProcess;
 
 
-- (id)initWithMerchantIdentifier:(NSString*)merchantIdentifier withMerchantID:(NSString*)optiMerchantID withMerchantPwd:(NSString*)optiMerchantPwd withMerchantCountry:(NSString*)merchantCountry withMerchantCurrency:(NSString*)merchantCurrency
-{
+
+
+
+- (id)initWithMerchantIdentifier:(NSString*)merchantIdentifier withMerchantID:(NSString*)optiMerchantID withMerchantPwd:(NSString*)optiMerchantPwd withMerchantCountry:(NSString*)merchantCountry withMerchantCurrency:(NSString*)merchantCurrency withEnviornmentType:(NSString *)enviornmentType withMerchantAuthID:(NSString *)merchantAuthID withMerchantAuthPassword:(NSString*)merchantAuthPassword withMerchantAccountNumber:(NSString *)merchantAccountNumber{
     // Set the data for all objects !!!
     
     PaySafeDef.merchantUserID=optiMerchantID;
     PaySafeDef.merchantPassword=optiMerchantPwd;
-    
     PaySafeDef.merchantIdentifier=merchantIdentifier;
     PaySafeDef.countryCode=merchantCountry;
     PaySafeDef.currencyCode=merchantCurrency;
+    PaySafeDef.envType=enviornmentType;
+    PaySafeDef.merchantAuthID=merchantAuthID;
+    PaySafeDef.merchantAuthPassword=merchantAuthPassword;
+    PaySafeDef.merchantAccountNo = merchantAccountNumber;
+    
     
     return self;
 }
+
+
 
 - (BOOL)isApplePaySupport
 {
@@ -285,6 +293,8 @@
     NSData *plainData = [userIDPassword dataUsingEncoding:NSUTF8StringEncoding];
     NSString *base64String = [plainData base64EncodedStringWithOptions:0];
     NSString *authorizationField= [NSString stringWithFormat: @"Basic %@", base64String];
+    
+    
 
     NSString *urlString;
     if([serviceName isEqualToString:SingleUserTokneServiceRequest]){

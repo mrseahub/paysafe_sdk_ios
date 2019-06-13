@@ -105,8 +105,15 @@
     NSString *merchantCountryCode = [myDictionary objectForKey:@"merchant_country_code"];
     NSString *merchantCurrencyCode = [myDictionary objectForKey:@"merchant_currency_code"];
     NSString *appleMerchantIdentifier = [myDictionary objectForKey:@"merchant_identifier"];
+    NSString *envType = [myDictionary objectForKey:@"enviornmentType"];
+    NSString *merchantAuthID = [myDictionary objectForKey:@"merchant_api_key_id_auth"];
+    NSString *merchantAuthPassword = [myDictionary objectForKey:@"merchant_api_key_password_auth"];
+    NSString *merchantAccountNumber= [myDictionary objectForKey:@"merchant_account_number"];
+
+
+
+    self.PaysafeAuthPaymentController = [[PaySafePaymentAuthorizationProcess alloc]initWithMerchantIdentifier:appleMerchantIdentifier withMerchantID:merchantUserID withMerchantPwd:merchantPassword withMerchantCountry:merchantCountryCode withMerchantCurrency:merchantCurrencyCode withEnviornmentType:envType withMerchantAuthID:merchantAuthID withMerchantAuthPassword:merchantAuthPassword withMerchantAccountNumber:merchantAccountNumber];
     
-    self.PaysafeAuthPaymentController = [[PaySafePaymentAuthorizationProcess alloc] initWithMerchantIdentifier:appleMerchantIdentifier withMerchantID:merchantUserID withMerchantPwd:merchantPassword withMerchantCountry:merchantCountryCode withMerchantCurrency:merchantCurrencyCode];
 }
 
 -(void)callBackResponseFromOPTSDK:(NSDictionary *)response
