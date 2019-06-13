@@ -78,7 +78,7 @@ class TVViewController: UIViewController , UITextFieldDelegate, AuthorizationPro
             
             myDictionary = NSMutableDictionary.init(contentsOfFile: path)
             
-            let merchantID: String = myDictionary["OptiMerchantID-Client"]! as! String
+            let merchantID: String = myDictionary["merchant_api_key_id"]! as! String
             
             if merchantID.isEqual("Single Use API Key ID") {
                 return false
@@ -140,20 +140,31 @@ class TVViewController: UIViewController , UITextFieldDelegate, AuthorizationPro
             if let nameObject = response["error"] as? NSDictionary {
                 var errorCode: String = String()
                 var errorMsg: String = String()
-                if let errCode: AnyObject = nameObject["code"] as! NSString {
-                    if let nameString = errCode as? String {
-                        errorCode = nameString
-                    }
-                }
                 
-                if let errCode: AnyObject = nameObject["message"] as! NSString {
-                    if let nameString = errCode as? String {
-                        errorMsg = nameString
-                    }
+                if let errCode = nameObject["code"] as? String { //Here i am considering value for jsonResult["records"] as String, if it other than String, please change it.
+                      errorCode = errCode
+
                 }
+                if let errCode = nameObject["message"] as? String { //Here i am considering value for jsonResult["records"] as String, if it other than String, please change it.
+                    errorMsg = errCode
+                    
+                }
+
+
+                
+//                if let errCode: AnyObject = nameObject["code"] as! NSString {
+//                    if let nameString = errCode as? String {
+//                        errorCode = nameString
+//                    }
+//                }
+//
+//                if let errCode: AnyObject = nameObject["message"] as! NSString {
+//                    if let nameString = errCode as? String {
+//                        errorMsg = nameString
+//                    }
+//                }
                 
                 self .showAlertView(errorCode, errorMessage: errorMsg)
-                
                 
             }
             else{
@@ -242,17 +253,18 @@ class TVViewController: UIViewController , UITextFieldDelegate, AuthorizationPro
     func callBackAuthorizationProcess(_ dictonary: [AnyHashable: Any]!) {
         var errorCode: String = String()
         var errorMsg: String = String()
-        
+
+
         if(dictonary != nil)
         {
             if let nameObject: AnyObject = dictonary["error"] as? NSDictionary {
-                if let errCode: AnyObject = nameObject["code"] as! NSString {
+                if let errCode: AnyObject = nameObject["code"] as? NSString {
                     if let nameString = errCode as? String {
                         errorCode = nameString
                     }
                 }
                 
-                if let errMsg: AnyObject = nameObject["message"] as! NSString {
+                if let errMsg: AnyObject = nameObject["message"] as? NSString {
                     if let nameString = errMsg as? String {
                         errorMsg = nameString
                     }
@@ -265,7 +277,7 @@ class TVViewController: UIViewController , UITextFieldDelegate, AuthorizationPro
                     if nameString == "COMPLETED"{
                         //errorCode = nameString
                         
-                        if let nameObject: AnyObject = dictonary["settleWithAuth"] as! NSNumber {
+                        if let nameObject: AnyObject = dictonary["settleWithAuth"] as? NSNumber {
                             if let nameString = nameObject as? NSNumber {
                                 if nameString == 0 {
                                     errorCode = "Success"
@@ -290,11 +302,10 @@ class TVViewController: UIViewController , UITextFieldDelegate, AuthorizationPro
         // Merchant shipping methods
         let shippingMethod1Dictionary: [String: String] = ["shippingName":"Llama California Shipping", "shippingAmount":"0.01", "shippingDes":"3-5 Business Days"]
         
-        let envType:String = "TEST_ENV";  //PROD_ENV TEST_ENV
+        let dict = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "MerchantRealConfiguration", ofType: "plist")!)
         
-        let timeIntrval:String = "30.0";  //Time interval for connection to Optimal server
         
-        let enviDictionary: [String: String] = ["EnvType":envType, "TimeIntrval":timeIntrval]
+        let enviDictionary: [String: String] = ["EnvType":dict!.object(forKey: "enviornmentType") as! String, "TimeIntrval":dict?.object(forKey: "timeInterval") as! String]
         
         let dataDictonary: [String: Dictionary<String, String>] = ["ShippingMethod": shippingMethod1Dictionary,"EnvSettingDict": enviDictionary]
         

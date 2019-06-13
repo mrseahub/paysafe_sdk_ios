@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <iOS_SDK/WebServiceHandler.h>
+#import <iOS_SDK/PaySafeDef.h>
+
 
 @protocol AuthorizationProcessDelegate <NSObject>
 
@@ -18,9 +21,8 @@
 
 @end
 
-@interface OPTAuthorizationProcess : NSObject<NSURLConnectionDelegate, UIAlertViewDelegate>
+@interface OPTAuthorizationProcess : NSObject<UIAlertViewDelegate>
 {
-    NSURLConnection *connection;
 }
 
 @property (nonatomic, retain) id <AuthorizationProcessDelegate>processDelegate;

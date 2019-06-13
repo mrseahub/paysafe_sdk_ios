@@ -2,17 +2,25 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>OptiMerchantPassword-Client</key>
-	<string>Single Use API Key Password</string>
-	<key>OptiMerchantID-Client</key>
-	<string>Single Use API Key ID</string>
-	<key>countryCode</key>
-	<string>US</string>
-	<key>CurrencyCode</key>
-	<string>USD</string>
-	<key>merchantAccount</key>
-	<string>Your merchant account number</string>
-	<key>merchantIdentifier</key>
-	<string>Your merchant identifier</string>
+	<key>merchant_api_key_password</key>
+	<string></string>
+	<key>merchant_api_key_id</key>
+	<string></string>
+	<key>merchant_country_code</key>
+	<string></string>
+	<key>merchant_currency_code</key>
+	<string></string>
+	<key>merchant_account_number</key>
+	<string></string>
+	<key>merchant_identifier</key>
+	<string></string>
+	<key>enviornmentType</key>
+	<string>TEST_ENV</string>
+	<key>timeInterval</key>
+	<string>30</string>
+	<key>merchant_api_key_id_auth</key>
+	<string></string>
+	<key>merchant_api_key_password_auth</key>
+	<string></string>
 </dict>
 </plist>

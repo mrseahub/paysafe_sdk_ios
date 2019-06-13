@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1742ACEB22A90EB300EF93BE /* PaySafeMockPaymentSummaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1742ACEA22A90EB300EF93BE /* PaySafeMockPaymentSummaryViewController.xib */; };
+		1742ACEF22A9234200EF93BE /* OptimalImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1742ACEE22A9234200EF93BE /* OptimalImg.png */; };
 		5342431A1AE8AB09003DCD29 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 534243191AE8AB09003DCD29 /* main.m */; };
 		5342431D1AE8AB09003DCD29 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5342431C1AE8AB09003DCD29 /* AppDelegate.m */; };
 		534243251AE8AB09003DCD29 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 534243241AE8AB09003DCD29 /* Images.xcassets */; };
@@ -32,14 +34,12 @@
 		6305BA171D08041E00A003E1 /* BuyNow_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = 6305BA021D08041E00A003E1 /* BuyNow_btn.png */; };
 		6305BA181D08041E00A003E1 /* CheckoutImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6305BA031D08041E00A003E1 /* CheckoutImg.png */; };
 		6305BA191D08041E00A003E1 /* Home.png in Resources */ = {isa = PBXBuildFile; fileRef = 6305BA041D08041E00A003E1 /* Home.png */; };
-		6305BA1A1D08041E00A003E1 /* OptimalImg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6305BA051D08041E00A003E1 /* OptimalImg.png */; };
 		6305BA1B1D08041E00A003E1 /* payNow_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 6305BA061D08041E00A003E1 /* payNow_img.png */; };
 		6305BA1C1D08041E00A003E1 /* Phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 6305BA071D08041E00A003E1 /* Phone.png */; };
 		6305BA1D1D08041E00A003E1 /* shoe.png in Resources */ = {isa = PBXBuildFile; fileRef = 6305BA081D08041E00A003E1 /* shoe.png */; };
 		6313E8501CF2D611002C8A1F /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6313E84C1CF2D611002C8A1F /* HomeViewController.m */; };
 		6313E8511CF2D611002C8A1F /* CreditCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6313E84F1CF2D611002C8A1F /* CreditCardViewController.m */; };
 		635B48FB1D7EDCAB00F53F17 /* iOS_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635B48FA1D7EDCAB00F53F17 /* iOS_SDK.framework */; };
-		635B48FD1D7EDCB500F53F17 /* PaySafeMockPaymentSummaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 635B48FC1D7EDCB500F53F17 /* PaySafeMockPaymentSummaryViewController.xib */; };
 		74DA6A7D1CFACF71001B3BE2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74DA6A7B1CFACF71001B3BE2 /* Main.storyboard */; };
 		74FEAD5F1CD0037200F11131 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FEAD5D1CD0037200F11131 /* NSData+Base64.m */; };
 		75E0AB171CCCCB3A0071BAC4 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 75E0AB161CCCCB3A0071BAC4 /* Utils.m */; };
@@ -56,6 +56,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1742ACEA22A90EB300EF93BE /* PaySafeMockPaymentSummaryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaySafeMockPaymentSummaryViewController.xib; sourceTree = "<group>"; };
+		1742ACEE22A9234200EF93BE /* OptimalImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OptimalImg.png; sourceTree = "<group>"; };
 		534243141AE8AB09003DCD29 /* TestMerchAppExample_Obj-C.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TestMerchAppExample_Obj-C.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		534243191AE8AB09003DCD29 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5342431B1AE8AB09003DCD29 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -89,7 +91,6 @@
 		6305BA021D08041E00A003E1 /* BuyNow_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BuyNow_btn.png; sourceTree = "<group>"; };
 		6305BA031D08041E00A003E1 /* CheckoutImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CheckoutImg.png; sourceTree = "<group>"; };
 		6305BA041D08041E00A003E1 /* Home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Home.png; sourceTree = "<group>"; };
-		6305BA051D08041E00A003E1 /* OptimalImg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OptimalImg.png; sourceTree = "<group>"; };
 		6305BA061D08041E00A003E1 /* payNow_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = payNow_img.png; sourceTree = "<group>"; };
 		6305BA071D08041E00A003E1 /* Phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Phone.png; sourceTree = "<group>"; };
 		6305BA081D08041E00A003E1 /* shoe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shoe.png; sourceTree = "<group>"; };
@@ -98,7 +99,6 @@
 		6313E84E1CF2D611002C8A1F /* CreditCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditCardViewController.h; sourceTree = "<group>"; };
 		6313E84F1CF2D611002C8A1F /* CreditCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditCardViewController.m; sourceTree = "<group>"; };
 		635B48FA1D7EDCAB00F53F17 /* iOS_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iOS_SDK.framework; sourceTree = "<group>"; };
-		635B48FC1D7EDCB500F53F17 /* PaySafeMockPaymentSummaryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PaySafeMockPaymentSummaryViewController.xib; path = iOS_SDK.framework/Headers/PaySafeMockPaymentSummaryViewController.xib; sourceTree = "<group>"; };
 		74DA6A7C1CFACF71001B3BE2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		74FEAD5C1CD0037200F11131 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		74FEAD5D1CD0037200F11131 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
@@ -202,8 +202,8 @@
 		6305B9BC1D0800B200A003E1 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
+				1742ACEA22A90EB300EF93BE /* PaySafeMockPaymentSummaryViewController.xib */,
 				635B48FA1D7EDCAB00F53F17 /* iOS_SDK.framework */,
-				635B48FC1D7EDCB500F53F17 /* PaySafeMockPaymentSummaryViewController.xib */,
 				6305B9BD1D0800B200A003E1 /* Authorization */,
 			);
 			path = SDK;
@@ -245,9 +245,9 @@
 				6305BA001D08041E00A003E1 /* Authorization.png */,
 				6305BA011D08041E00A003E1 /* BlankGreyScreen.png */,
 				6305BA021D08041E00A003E1 /* BuyNow_btn.png */,
+				1742ACEE22A9234200EF93BE /* OptimalImg.png */,
 				6305BA031D08041E00A003E1 /* CheckoutImg.png */,
 				6305BA041D08041E00A003E1 /* Home.png */,
-				6305BA051D08041E00A003E1 /* OptimalImg.png */,
 				6305BA061D08041E00A003E1 /* payNow_img.png */,
 				6305BA071D08041E00A003E1 /* Phone.png */,
 				6305BA081D08041E00A003E1 /* shoe.png */,
@@ -329,7 +329,7 @@
 		5342430C1AE8AB09003DCD29 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = opus;
 				TargetAttributes = {
 					534243131AE8AB09003DCD29 = {
@@ -386,7 +386,6 @@
 				534243281AE8AB09003DCD29 /* LaunchScreen.xib in Resources */,
 				6305BA111D08041E00A003E1 /* ApplePayBTN_32pt__whiteLine_logo_@2x.png in Resources */,
 				6305BA121D08041E00A003E1 /* ApplePayBTN_32pt__whiteLine_logo_@3x.png in Resources */,
-				635B48FD1D7EDCB500F53F17 /* PaySafeMockPaymentSummaryViewController.xib in Resources */,
 				6305B9CA1D08019F00A003E1 /* MerchantRealConfiguration.plist in Resources */,
 				6305BA0E1D08041E00A003E1 /* ApplePayBTN_32pt__white_logo_@3x.png in Resources */,
 				6305BA0C1D08041E00A003E1 /* ApplePayBTN_32pt__black_textLogo_@3x.png in Resources */,
@@ -394,9 +393,10 @@
 				6305BA0B1D08041E00A003E1 /* ApplePayBTN_32pt__black_textLogo_@2x.png in Resources */,
 				6305BA1C1D08041E00A003E1 /* Phone.png in Resources */,
 				6305BA151D08041E00A003E1 /* Authorization.png in Resources */,
-				6305BA1A1D08041E00A003E1 /* OptimalImg.png in Resources */,
+				1742ACEB22A90EB300EF93BE /* PaySafeMockPaymentSummaryViewController.xib in Resources */,
 				6305BA101D08041E00A003E1 /* ApplePayBTN_32pt__white_textLogo_@3x.png in Resources */,
 				6305BA181D08041E00A003E1 /* CheckoutImg.png in Resources */,
+				1742ACEF22A9234200EF93BE /* OptimalImg.png in Resources */,
 				6305BA0A1D08041E00A003E1 /* ApplePayBTN_32pt__black_logo_@3x.png in Resources */,
 				6305BA191D08041E00A003E1 /* Home.png in Resources */,
 				6305BA091D08041E00A003E1 /* ApplePayBTN_32pt__black_logo_@2x.png in Resources */,
@@ -480,14 +480,22 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -525,14 +533,22 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -579,7 +595,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.paysafe.test.objc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "937682ee-c5ae-48e3-af12-788b751b1019";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = PaysafeObjc_Dev_ProvisioningProfile;
 			};
 			name = Debug;
@@ -607,7 +623,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.paysafe.test.objc;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "937682ee-c5ae-48e3-af12-788b751b1019";
+				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = PaysafeObjc_Dev_ProvisioningProfile;
 			};
 			name = Release;

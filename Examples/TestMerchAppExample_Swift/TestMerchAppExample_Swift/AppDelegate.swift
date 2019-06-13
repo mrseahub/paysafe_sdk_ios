@@ -20,8 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         self.loadDataFrmPlist()
-
-        PaysafeAuthController = PaySafePaymentAuthorizationProcess(merchantIdentifier: plistDataDictionary!["merchantIdentifier"]!  as? String, withMerchantID: plistDataDictionary!["OptiMerchantID-Client"]!  as? String, withMerchantPwd: plistDataDictionary!["OptiMerchantPassword-Client"]!  as? String, withMerchantCountry: plistDataDictionary!["countryCode"]!  as? String, withMerchantCurrency: plistDataDictionary!["CurrencyCode"]!  as? String)
+        
+        PaysafeAuthController = PaySafePaymentAuthorizationProcess(merchantIdentifier: plistDataDictionary!["merchant_identifier"]!  as? String, withMerchantID: plistDataDictionary!["merchant_api_key_id"]!  as? String, withMerchantPwd: plistDataDictionary!["merchant_api_key_password"]!  as? String, withMerchantCountry: plistDataDictionary!["merchant_country_code"]!  as? String, withMerchantCurrency: plistDataDictionary!["merchant_currency_code"]!  as? String, withEnviornmentType: plistDataDictionary!["enviornmentType"]!  as? String, withMerchantAuthID: plistDataDictionary!["merchant_api_key_id_auth"]!  as? String, withMerchantAuthPassword: plistDataDictionary!["merchant_api_key_password_auth"]!  as? String, withMerchantAccountNumber: plistDataDictionary!["merchant_account_number"]!  as? String)
         return true
     }
     

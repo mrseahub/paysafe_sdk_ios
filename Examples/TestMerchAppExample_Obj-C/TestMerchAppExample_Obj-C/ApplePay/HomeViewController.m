@@ -45,20 +45,27 @@
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"MerchantRealConfiguration" ofType:@"plist"];
     NSMutableDictionary *myDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
-    NSString *merchantUserID = [myDictionary objectForKey:@"OptiMerchantID-Client"];
-    NSString *merchantPassword =[myDictionary objectForKey:@"OptiMerchantPassword-Client"];
-    NSString *merchantCountryCode = [myDictionary objectForKey:@"countryCode"];
-    NSString *merchantCurrencyCode = [myDictionary objectForKey:@"CurrencyCode"];
-    NSString *appleMerchantIdentifier = [myDictionary objectForKey:@"merchantIdentifier"];
+    NSString *merchantUserID = [myDictionary objectForKey:@"merchant_api_key_id"];
+    NSString *merchantPassword =[myDictionary objectForKey:@"merchant_api_key_password"];
+    NSString *merchantCountryCode = [myDictionary objectForKey:@"merchant_country_code"];
+    NSString *merchantCurrencyCode = [myDictionary objectForKey:@"merchant_currency_code"];
+    NSString *appleMerchantIdentifier = [myDictionary objectForKey:@"merchant_identifier"];
+    NSString *merchantAuthID = [myDictionary objectForKey:@"merchant_api_key_id_auth"];
+    NSString *merchantAuthPassword = [myDictionary objectForKey:@"merchant_api_key_password_auth"];
+    NSString *envType = [myDictionary objectForKey:@"enviornmentType"];
+    NSString *merchantAccountNumber = [myDictionary objectForKey:@"merchant_account_number"];
+
+
     
-    self.PaysafeAuthController = [[PaySafePaymentAuthorizationProcess alloc] initWithMerchantIdentifier:appleMerchantIdentifier withMerchantID:merchantUserID withMerchantPwd:merchantPassword withMerchantCountry:merchantCountryCode withMerchantCurrency:merchantCurrencyCode];
+    self.PaysafeAuthController = [[PaySafePaymentAuthorizationProcess alloc]initWithMerchantIdentifier:appleMerchantIdentifier withMerchantID:merchantUserID withMerchantPwd:merchantPassword withMerchantCountry:merchantCountryCode withMerchantCurrency:merchantCurrencyCode withEnviornmentType:envType withMerchantAuthID:merchantAuthID withMerchantAuthPassword:merchantAuthPassword withMerchantAccountNumber:merchantAccountNumber];
+    
 }
 
 -(BOOL)validateCredentials {
     
     NSString *path = [[NSBundle mainBundle] pathForResource:@"MerchantRealConfiguration" ofType:@"plist"];
     NSMutableDictionary *myDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
-    NSString *merchantUserID = [myDictionary objectForKey:@"OptiMerchantID-Client"];
+    NSString *merchantUserID = [myDictionary objectForKey:@"merchant_api_key_id"];
     
     if ([merchantUserID isEqualToString:@"Single Use API Key ID"]) {
         return NO;
@@ -74,16 +81,13 @@
 -(IBAction)homePayBtnSelected:(id)sender{
     
     if (![self validateCredentials]) {
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"PaySafe" message:@"Please enter valid merchant credentials" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+        [self showAlertWithTitle:@"PaySafe" withMsg:@"Please enter valid merchant credentials"];
         return;
     }
     
     
     if([amountTxt.text isEqualToString:@""] || [amountTxt.text isEqualToString:nil]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Amount should not be empty/zero." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+      [self showAlertWithTitle:@"Alert" withMsg:@"Amount should not be empty/zero."];
         return;
     }
     
@@ -95,25 +99,15 @@
         [self.PaysafeAuthController beginPayment:self withRequestData:[self createDataDictionary] withCartData:[self cartData]];
     }
     else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
-                                                        message:@"Device does not support Apple Pay!"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
+        [self showAlertWithTitle:@"Alert" withMsg:@"Device does not support Apple Pay!"];
     }
     
     
 #else
     if([self.PaysafeAuthController isApplePaySupport]==false)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
-                                                        message:@"Device does not support Apple Pay!"
-                                                       delegate:nil
-                                              cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-        //[self callNonApplePayFlow];
+        [self showAlertWithTitle:@"Alert" withMsg:@"Device does not support Apple Pay!"];
+
 
     } else
     {
@@ -141,10 +135,10 @@
     
     NSDictionary *shippingMethod = [NSDictionary dictionaryWithObjectsAndKeys:shippingMethodName,@"shippingName",shippingMethodAmount,@"shippingAmount", shippingMethodDescription,@"shippingDes", nil];
     
-    NSString *envType = @"TEST_ENV";  //PROD_ENV TEST_ENV
-    NSString *timeIntrval = @"30.0";
     
-    NSDictionary *envSettingDict = [NSDictionary dictionaryWithObjectsAndKeys:envType,@"EnvType",timeIntrval,@"TimeIntrval",nil];
+    NSMutableDictionary *EnvSettings = [[NSMutableDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"MerchantRealConfiguration" ofType:@"plist"]];
+    
+    NSDictionary *envSettingDict = [NSDictionary dictionaryWithObjectsAndKeys:[EnvSettings valueForKey:@"enviornmentType"],@"EnvType",[EnvSettings valueForKey:@"timeInterval"],@"TimeIntrval",nil];
     
     NSMutableDictionary *finalDataDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:shippingMethod, @"ShippingMethod",envSettingDict,@"EnvSettingDict", nil ];
     return finalDataDictionary;
@@ -182,22 +176,20 @@
             code=[errorDict objectForKey:@"code"];
             message=[errorDict objectForKey:@"message"];
             
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:code message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alert show];
+            [self showAlertWithTitle:code withMsg:message];
         }
         else
         {
             tokenResponse = [NSDictionary dictionaryWithDictionary:response];
             NSString *message = [NSString stringWithFormat:@"Your Payment Token is :: %@", [response objectForKey:@"paymentToken"]];
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Success" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alert show];
-            
+            [self showAlertWithTitle:@"Success" withMsg:message];
             authButton.hidden = false;
+            
         }
     }else{
         //Error handling
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:@"Error message" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alert show];
+        [self showAlertWithTitle:@"Alert" withMsg:@"Error message"];
+
     }
 }
 
@@ -217,7 +209,7 @@
         code=[errorDict objectForKey:@"code"];
         message=[errorDict objectForKey:@"message"];
         
-        [self showAlert:code message:message];
+        [self showAlertWithTitle:code withMsg:message];
     }
     else if([([dictonary objectForKey:@"status"]) isEqualToString:@"COMPLETED"])
     {
@@ -227,24 +219,16 @@
         {
             code=@"Success";
             message=@"Authorization completed, please proceed for settlement.";
-            [self showAlert:code message:message];
+            [self showAlertWithTitle:code withMsg:message];
         }else{
             code=@"Success";
             message=@"Settlement got completed, please check your order history.";
-            [self showAlert:code message:message];
-            
+            [self showAlertWithTitle:code withMsg:message];
+
         }
     }
 }
 
--(void)showAlert:(NSString*)code message:(NSString *)message
-{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:code
-                                                    message:message
-                                                   delegate:self cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil, nil];
-    [alert show];
-}
 
 -(NSDictionary *)createAuthDataDictonary{
     
@@ -310,14 +294,21 @@
     [self callBackResponseFromOPTSDK:response];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)showAlertWithTitle:(NSString *)title withMsg:(NSString *)msg  {
+    
+    self.alertController = [UIAlertController alertControllerWithTitle:title message:msg preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                          handler:^(UIAlertAction * action) {
+                                                              [self removeAlertController];
+                                                          }];
+    [self.alertController addAction:defaultAction];
+    [self presentViewController:self.alertController animated:YES completion:nil];
+    
 }
-*/
+-(void)removeAlertController {
+    [self dismissViewControllerAnimated:YES completion:^{
+    }];
+}
+
 
 @end

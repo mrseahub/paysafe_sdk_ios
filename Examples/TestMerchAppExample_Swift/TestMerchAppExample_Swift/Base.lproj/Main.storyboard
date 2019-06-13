@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="Th0-gh-693">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES" initialViewController="Th0-gh-693">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -57,7 +57,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1173.5" y="-1233.5"/>
+            <point key="canvasLocation" x="-1877.5999999999999" y="-1109.5952023988007"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="R9l-jw-4as">
@@ -159,7 +159,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XxM-nh-RUr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-689.5" y="-1233.5"/>
+            <point key="canvasLocation" x="-1103.2" y="-1109.5952023988007"/>
         </scene>
         <!--Credit Card Detail-->
         <scene sceneID="sgP-BF-OAx">
@@ -370,7 +370,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JKA-eg-3dW" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="OGi-V0-RfO" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-231" y="-1136"/>
+            <point key="canvasLocation" x="-369.60000000000002" y="-1021.889055472264"/>
         </scene>
         <!--MenuScreen-->
         <scene sceneID="pMM-i5-URI">
@@ -425,7 +425,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pw7-jm-E4d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1111" y="474"/>
+            <point key="canvasLocation" x="1697" y="385"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pK9-fa-XwM">
@@ -433,7 +433,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Th0-gh-693" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Unf-dT-9Lm">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -443,18 +443,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bEE-cn-IU1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="579" y="474"/>
+            <point key="canvasLocation" x="926.39999999999998" y="426.38680659670166"/>
         </scene>
     </scenes>
     <resources>
         <image name="ApplePayBTN_32pt__black_logo_.png" width="140" height="32"/>
         <image name="Shopping_img.png" width="341" height="198"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
-    </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="SrV-li-YCL"/>
     </inferredMetricsTieBreakers>

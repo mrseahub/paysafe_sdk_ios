@@ -12,14 +12,24 @@
 #import "PKPayment+OPAYMockKeys.h"
 #import "PaySafeMockCardStore.h"
 #import "PaySafeMockShippingManager.h"
+<<<<<<< HEAD
+=======
+#import <iOS_SDK/WebServiceHandler.h>
+#import <iOS_SDK/PaySafeDef.h>
+>>>>>>> apple-paysafe
 
 #define FAKE_APPLE_TOKE_SERVICE @"FakeApplePayTokenService"
 #define FAKE_SINGLE_USE_TOKEN @"FakeSingleUseTOkenService"
 
 
+<<<<<<< HEAD
 @interface PaySafeMockPaymentAuthorizationProcess ()  <UIViewControllerTransitioningDelegate,NSURLConnectionDelegate,PKPaymentAuthorizationViewControllerDelegate>
 {
     NSURLConnection *connection;
+=======
+@interface PaySafeMockPaymentAuthorizationProcess ()  <UIViewControllerTransitioningDelegate,PKPaymentAuthorizationViewControllerDelegate>
+{
+>>>>>>> apple-paysafe
     
     NSDictionary *merchantCartDictonary;
     NSDictionary *shippingMethodData;
@@ -56,16 +66,31 @@
     return true;
 }
 
+<<<<<<< HEAD
 - (id)initWithMerchantIdentifier:(NSString*)merchantIdentifier withMerchantID:(NSString*)optiMerchantID withMerchantPwd:(NSString*)optiMerchantPwd withMerchantCountry:(NSString*)merchantCountry withMerchantCurrency:(NSString*)merchantCurrency
 {
+=======
+- (id)initWithMerchantIdentifier:(NSString*)merchantIdentifier withMerchantID:(NSString*)optiMerchantID withMerchantPwd:(NSString*)optiMerchantPwd withMerchantCountry:(NSString*)merchantCountry withMerchantCurrency:(NSString*)merchantCurrency withEnviornmentType:(NSString *)enviornmentType withMerchantAuthID:(NSString *)merchantAuthID withMerchantAuthPassword:(NSString*)merchantAuthPassword withMerchantAccountNumber:(NSString *)merchantAccountNumber{
+>>>>>>> apple-paysafe
     // Set the data for all objects !!!
     
     PaySafeMockApplePayDef.merchantUserID=optiMerchantID;
     PaySafeMockApplePayDef.merchantPassword=optiMerchantPwd;
+<<<<<<< HEAD
     
     PaySafeMockApplePayDef.merchantIdentifier=merchantIdentifier;
     PaySafeMockApplePayDef.countryCode=merchantCountry;
     PaySafeMockApplePayDef.currencyCode=merchantCurrency;
+=======
+    PaySafeMockApplePayDef.merchantIdentifier=merchantIdentifier;
+    PaySafeMockApplePayDef.countryCode=merchantCountry;
+    PaySafeMockApplePayDef.currencyCode=merchantCurrency;
+    PaySafeMockApplePayDef.envType = enviornmentType;
+    PaySafeMockApplePayDef.merchantAuthID =merchantAuthID;
+    PaySafeMockApplePayDef.merchantAuthPassword = merchantAuthPassword;
+    PaySafeMockApplePayDef.merchantAccountNo =merchantAccountNumber;
+    //PaySafeMockApplePayDef.
+>>>>>>> apple-paysafe
     return self;
 }
 
@@ -167,7 +192,11 @@
 -(NSData *)getCardDetails:(PKPayment *)payment
 {
     NSString *accountNumbar =PaySafeMockApplePayDef.selectedCardNumber;//payment.opt_testCardNumber;
+<<<<<<< HEAD
     NSString *accountExpiry = @"181231";
+=======
+    NSString *accountExpiry = @"221231";
+>>>>>>> apple-paysafe
     NSString *amount = [merchantCartDictonary valueForKey:@"CartCost"];
     NSString *cardHolderName = @"Bill Gates";
     
@@ -182,6 +211,7 @@
 //get token from optimal !!!
 - (void)requestServiceByName:(NSString *)serviceName
 {
+<<<<<<< HEAD
     if (connection != nil)
     {
         connection=nil;
@@ -269,6 +299,57 @@
     }
 }
 
+=======
+    requestServiceName=serviceName;
+    NSString *userIDPassword= [NSString stringWithFormat:@"%@:%@", PaySafeMockApplePayDef.merchantUserID, PaySafeMockApplePayDef.merchantPassword];
+    NSData *plainData = [userIDPassword dataUsingEncoding:NSUTF8StringEncoding];
+        NSString *base64String = [plainData base64EncodedStringWithOptions:0];
+    NSString *authorizationField= [NSString stringWithFormat: @"Basic %@", base64String];
+    self.responseData=[NSMutableData data];
+     NSString *projectsUrl;
+     NSData *postData;
+    if ([requestServiceName isEqualToString:FAKE_APPLE_TOKE_SERVICE]) {
+        [self showActivityViewer];
+        projectsUrl = [NSString stringWithFormat:@"%@/customervault/v1/applepaysingleusetokens/faketoken/simple",[PaySafeDef getOptimalUrl]];
+        postData = cardData;
+    }
+    else if([requestServiceName isEqualToString:FAKE_SINGLE_USE_TOKEN]) {
+        projectsUrl = [NSString stringWithFormat:@"%@/customervault/v1/applepaysingleusetokens",[PaySafeDef getOptimalUrl]];
+
+        postData = fakeTokenData;
+
+    }
+    
+    [[WebServiceHandler sharedManager] callWebServiceWithURL:projectsUrl withWebServiceName:requestServiceName withAuthorization:authorizationField withReqData:postData withMethod:@"POST" withSuccessfulBlock:^(NSData * _Nonnull responseData,NSString *serviceName) {
+        self.responseData = (NSMutableData *)responseData;
+        NSError *myError = nil;
+        NSDictionary *res = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
+        
+        if ([serviceName isEqualToString:FAKE_APPLE_TOKE_SERVICE])
+        {
+            self.fakeTokenData=self.responseData;
+            [self requestServiceByName:FAKE_SINGLE_USE_TOKEN];
+        }
+        else if([serviceName isEqualToString:FAKE_SINGLE_USE_TOKEN])
+        {
+            [self hideActivityViewer];
+            [self.authTestDelegate callBackResponseFromOPAYMockSDK:res];
+        }
+
+        
+    } withFailedBlock:^(NSError * _Nonnull error) {
+        [self hideActivityViewer];
+        NSLog(@"Error %@",error.debugDescription);
+      //  [self.authTestDelegate callBackResponseFromOPAYMockSDK:error.];
+
+
+    }];
+    
+
+}
+
+
+>>>>>>> apple-paysafe
 //////// ANIMATION ///////////
 
 -(void)showActivityViewer

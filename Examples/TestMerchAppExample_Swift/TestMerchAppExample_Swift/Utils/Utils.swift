@@ -28,7 +28,7 @@ class Utils: NSObject {
 
     class func getProfileID() -> AnyObject!
     {
-    return defaults.object(forKey: keyProfileID) as AnyObject!
+    return defaults.object(forKey: keyProfileID) as AnyObject
     }
     
     class func deleteProfileID()
@@ -46,7 +46,7 @@ class Utils: NSObject {
     }
     class func getMerchantCustomerID() -> AnyObject!
     {
-        return defaults.object(forKey: keyMerchantCustomerID) as AnyObject!
+        return defaults.object(forKey: keyMerchantCustomerID) as AnyObject
     }
     class func deleteMerchantCustomerID()
     {
@@ -62,7 +62,7 @@ class Utils: NSObject {
     
     class func getAddressID() -> AnyObject!
     {
-    return defaults.object(forKey: keyAddressID) as AnyObject!
+    return defaults.object(forKey: keyAddressID) as AnyObject
     }
     
     class func  deleteAddressID()
@@ -83,7 +83,7 @@ class Utils: NSObject {
     }
     class func getACH_AccountID() -> AnyObject!
     {
-     return defaults.object(forKey: keyACH_AccountID) as AnyObject!
+     return defaults.object(forKey: keyACH_AccountID) as AnyObject
     }
     class func deleteACH_AccountID()
     {
@@ -98,7 +98,7 @@ class Utils: NSObject {
     }
     class func getBACS_AccountID() -> AnyObject!
     {
-        return defaults.object(forKey: keyBACS_AccountID) as AnyObject!
+        return defaults.object(forKey: keyBACS_AccountID) as AnyObject
     }
     class func deleteBACS_AccountID() 
     {
@@ -114,7 +114,7 @@ class Utils: NSObject {
     }
     class func getEFT_AccountID() -> AnyObject!
     {
-        return defaults.object(forKey: keyEFT_AccountID) as AnyObject!
+        return defaults.object(forKey: keyEFT_AccountID) as AnyObject
     }
     class func deleteEFT_AccountID() 
     {
@@ -130,7 +130,7 @@ class Utils: NSObject {
     }
     class func getSEPA_AccountID() -> AnyObject!
     {
-        return defaults.object(forKey: keySEPA_AccountID) as AnyObject!
+        return defaults.object(forKey: keySEPA_AccountID) as AnyObject
     }
     class func deleteSEPA_AccountID() 
     {
@@ -146,7 +146,7 @@ class Utils: NSObject {
     
     class func getACH_PaymentToken() -> AnyObject!
     {
-        return defaults.object(forKey: keyACH_PaymentToken) as AnyObject!
+        return defaults.object(forKey: keyACH_PaymentToken) as AnyObject
     }
     
     class func setBACS_PaymentToken(_ strPaymentToken:String)
@@ -157,7 +157,7 @@ class Utils: NSObject {
     
      class func getBACS_PaymentToken() -> AnyObject!
     {
-        return defaults.object(forKey: keyBACS_PaymentToken) as AnyObject!
+        return defaults.object(forKey: keyBACS_PaymentToken) as AnyObject
     }
     
      class func setEFT_PaymentToken(_ strPaymentToken:String)
@@ -168,7 +168,7 @@ class Utils: NSObject {
     
      class func getEFT_PaymentToken() -> AnyObject!
     {
-        return defaults.object(forKey: keyEFT_PaymentToken) as AnyObject!
+        return defaults.object(forKey: keyEFT_PaymentToken) as AnyObject
     }
     
      class func setSEPA_PaymentToken(_ strPaymentToken:String)
@@ -179,7 +179,7 @@ class Utils: NSObject {
     
      class func getSEPA_PaymentToken() -> AnyObject!
     {
-        return defaults.object(forKey: keySEPA_PaymentToken) as AnyObject!
+        return defaults.object(forKey: keySEPA_PaymentToken) as AnyObject
     }
 
     //*****************
@@ -192,7 +192,7 @@ class Utils: NSObject {
     }
     class func getACH_AccountNo() -> AnyObject!
     {
-        return defaults.object(forKey: keyACH_AccountNo) as AnyObject!
+        return defaults.object(forKey: keyACH_AccountNo) as AnyObject
     }
     
     
@@ -203,7 +203,7 @@ class Utils: NSObject {
     }
     class func getEFT_AccountNo() -> AnyObject!
     {
-        return defaults.object(forKey: keyEFT_AccountNo) as AnyObject!
+        return defaults.object(forKey: keyEFT_AccountNo) as AnyObject
     }
 
     class func setBACS_AccountNO(_ strAccountID:String)
@@ -213,7 +213,7 @@ class Utils: NSObject {
     }
     class func getBACS_AccountNo() -> AnyObject!
     {
-        return defaults.object(forKey: keyBACS_AccountNo) as AnyObject!
+        return defaults.object(forKey: keyBACS_AccountNo) as AnyObject
     }
 
     
@@ -224,7 +224,7 @@ class Utils: NSObject {
     }
     class func getSEPA_AccountNo() -> AnyObject!
     {
-        return defaults.object(forKey: keySEPA_AccountNo) as AnyObject!
+        return defaults.object(forKey: keySEPA_AccountNo) as AnyObject
     }
 
 
@@ -242,7 +242,7 @@ class Utils: NSObject {
     }
     class func getACH_PurchaseID() -> AnyObject!
     {
-        return defaults.object(forKey: keyACH_PurchaseID) as AnyObject!
+        return defaults.object(forKey: keyACH_PurchaseID) as AnyObject
     }
     
     //--------------------------------------------------------
@@ -253,7 +253,7 @@ class Utils: NSObject {
     }
     class func getBACS_PurchaseID() -> AnyObject!
     {
-        return defaults.object(forKey: keyBACS_PurchaseID) as AnyObject!
+        return defaults.object(forKey: keyBACS_PurchaseID) as AnyObject
     }
     
     //--------------------------------------------------------
@@ -264,7 +264,7 @@ class Utils: NSObject {
     }
     class func getEFT_PurchaseID() -> AnyObject!
     {
-        return defaults.object(forKey: keyEFT_PurchaseID) as AnyObject!
+        return defaults.object(forKey: keyEFT_PurchaseID) as AnyObject
     }
     
     //--------------------------------------------------------
@@ -275,7 +275,7 @@ class Utils: NSObject {
     }
     class func getSEPA_PurchaseID() -> AnyObject!
     {
-        return defaults.object(forKey: keySEPA_PurchaseID) as AnyObject!
+        return defaults.object(forKey: keySEPA_PurchaseID) as AnyObject
     }
         
     //--------------------------------------------------------

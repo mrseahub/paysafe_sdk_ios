@@ -82,12 +82,10 @@ class SWCreditCardViewController : UIViewController , UITextFieldDelegate,OPAYPa
     
     @IBAction func confirmBtnSelected(_ sender:UIButton)
     {
-        let envType:String = "TEST_ENV";  //PROD_ENV TEST_ENV
+        let dict = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "MerchantRealConfiguration", ofType: "plist")!)
         
-        let timeIntrval:String = "30.0";  //Time interval for connection to Optimal server
-        
-        let enviDictionary: [String: String] = ["EnvType":envType, "TimeIntrval":timeIntrval]
-        
+        let enviDictionary: [String: String] = ["EnvType":dict!.object(forKey: "enviornmentType") as! String, "TimeIntrval":dict?.object(forKey: "timeInterval") as! String]
+
         appDelegate.PaysafeAuthController?.authDelegate=self
         
         if (appDelegate.PaysafeAuthController?.responds(to: #selector(PaySafePaymentAuthorizationProcess.beginNonApplePayment(_:withRequestData:withEnvSettingDict:))) != nil)

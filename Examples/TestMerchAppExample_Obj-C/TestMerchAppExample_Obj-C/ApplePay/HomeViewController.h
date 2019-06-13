@@ -29,6 +29,7 @@
 @property (nonatomic, retain) IBOutlet UITextField *amountTxt;
 
 @property (nonatomic, retain) IBOutlet UIButton *btnBack;
+@property (nonatomic,strong)UIAlertController *alertController;
 
 @property (nonatomic, retain) PaySafePaymentAuthorizationProcess *PaysafeAuthController;
 @property (nonatomic, retain) OPTAuthorizationProcess *OPTAuthObj;

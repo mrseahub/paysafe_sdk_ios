@@ -50,82 +50,59 @@
 
 -(void)requestServiceRequestData:(NSData*)requestData{
     
-    [self callWaitingAlertViewTitle:@"" withMessage:nil withOkBtn:NO];
     
-    NSURL *projectsUrl;
+    [self callWaitingAlertViewTitle:@"" withMessage:@"Authorization being processed" withOkBtn:NO];
     
-    if (connection != nil) {
-        connection = nil;
-    }
+    NSString *apiName = @"authorizations";
+
+    NSString *urlString = [NSString stringWithFormat:@"%@/cardpayments/v1/accounts/%@/auths",[PaySafeDef getOptimalUrl],PaySafeDef.merchantAccountNo];
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"MerchantRealConfiguration" ofType:@"plist"];
-    NSMutableDictionary *myDictionary = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
+    NSString *userIDPassword= [NSString stringWithFormat:@"%@:%@",PaySafeDef.merchantAuthID,PaySafeDef.merchantAuthPassword];
+
     
-    NSString *urlString = [NSString stringWithFormat:@"%@/merchantcardtestapp/v1/accounts/%@/authorizations",BaseUrl,[myDictionary objectForKey:@"merchantAccount"]];
-    
-        
-    projectsUrl = [NSURL  URLWithString:urlString];
-    
-    NSString *userIDPassword= [NSString stringWithFormat:@"%@:%@", [myDictionary objectForKey:@"OptiMerchantID-Client"], [myDictionary objectForKey:@"OptiMerchantPassword-Client"]];
     NSData *plainData = [userIDPassword dataUsingEncoding:NSUTF8StringEncoding];
     NSString *base64String = [plainData base64EncodedStringWithOptions:0];
     
     NSString *authorizationField= [NSString stringWithFormat: @"Basic %@", base64String];
+    
+    [[WebServiceHandler sharedManager] callWebServiceWithURL:urlString withWebServiceName:apiName withAuthorization:authorizationField withReqData:requestData withMethod:@"POST" withSuccessfulBlock:^(NSData * _Nonnull responseData, NSString * _Nonnull serviceName) {
+        self.responseData = (NSMutableData *)responseData;
+        NSError *myError = nil;
+        NSDictionary *res = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
+        [self removeAlertView:self.alertCntrl];
+        [self.processDelegate callBackAuthorizationProcess:res];
+
         
-    NSMutableURLRequest *dataSubmit = [NSMutableURLRequest requestWithURL:projectsUrl cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:30.0];
-    [dataSubmit setHTTPMethod:@"POST"]; // 1
-    [dataSubmit setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [dataSubmit setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[requestData length]] forHTTPHeaderField:@"Content-Length"]; // 3
-    [dataSubmit setValue:authorizationField forHTTPHeaderField:@"Authorization"];
-    [dataSubmit setHTTPBody: requestData];
-    connection = [[NSURLConnection alloc]initWithRequest:dataSubmit delegate:self];
+    } withFailedBlock:^(NSError * _Nonnull error) {
+        
+        [self removeAlertView:self.alertCntrl];
+        [self callWaitingAlertViewTitle:@"Alert" withMessage:@"Network connection error, please try again." withOkBtn:YES];
+
+    }];
     self.responseData=[NSMutableData data];
+
+
+
 }
 
-#pragma mark NSURLConnection delegate
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response 
-{
-    [self.responseData setLength:0];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [self.responseData appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error 
-{
-    NSDictionary *res = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&error];
-    NSLog(@"Response Error::%@",res);
-    [self removeAlertView:_alertCntrl];
-    [self callWaitingAlertViewTitle:@"Alert" withMessage:@"Network connection error, please try again." withOkBtn:YES];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    // convert to JSON
-    NSError *myError = nil;
-    NSDictionary *res = [NSJSONSerialization JSONObjectWithData:self.responseData options:NSJSONReadingMutableLeaves error:&myError];
-    [self removeAlertView:_alertCntrl];
-    [self.processDelegate callBackAuthorizationProcess:res];
-}
 
 - (void)callWaitingAlertViewTitle:(NSString *)title withMessage:(NSString*)message withOkBtn:(BOOL)isOkBtn{
 
-    _alertCntrl = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    self.alertCntrl = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
     if (isOkBtn) {
         UIAlertAction* cancel = [UIAlertAction actionWithTitle:@"Retry" style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction * action) {
-                                                           [_alertCntrl dismissViewControllerAnimated:YES completion:nil];
+                                                           [self.alertCntrl dismissViewControllerAnimated:YES completion:nil];
                                                            [self callRetryRequest];
                                                        }];
-        [_alertCntrl addAction:cancel];
+        [self.alertCntrl addAction:cancel];
         
     } else {
         _indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         _indicator.center = CGPointMake((_alertCntrl.view.bounds.size.width/2.0)-45.00, _indicator.frame.size.height);
         [_indicator startAnimating];
-        [_alertCntrl.view addSubview:_indicator];
+        [self.alertCntrl.view addSubview:_indicator];
     }
         
     UIViewController *topController = [UIApplication sharedApplication].keyWindow.rootViewController;
@@ -133,7 +110,7 @@
     while (topController.presentedViewController) {
         topController = topController.presentedViewController;
     }
-    [topController presentViewController:_alertCntrl animated:YES completion:nil];
+    [topController presentViewController:self.alertCntrl animated:YES completion:nil];
 }
 
 - (void)removeAlertView:(UIAlertController *)alert{
@@ -142,7 +119,7 @@
         [_indicator removeFromSuperview];
         _indicator = nil;
     }
-    [_alertCntrl dismissViewControllerAnimated:YES completion:nil];
+    [self.alertCntrl dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)callRetryRequest

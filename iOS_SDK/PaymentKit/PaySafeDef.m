@@ -99,6 +99,26 @@ NSString * const url_for_single_user_token_Prod = @"https://api.paysafe.com";   
 + (void) setEnvType:(NSString*)value{
     envType=value;
 }
+<<<<<<< HEAD
+=======
++(NSString*)merchantAuthID {
+    
+    return merchantAuthID;
+}
++(void)setMerchantAuthID:(NSString *)ID {
+    merchantAuthID = ID;
+}
+
++(NSString*)merchantAuthPassword {
+    
+    return merchantAuthPassword;
+}
++(void)setMerchantAuthPassword:(NSString *)Password  {
+    merchantAuthPassword = Password;
+}
+
+
+>>>>>>> apple-paysafe
 
 +(NSString*)getOptimalUrl
 {

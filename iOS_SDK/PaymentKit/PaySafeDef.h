@@ -20,6 +20,11 @@ static NSString *countryCode;
 static NSString *currencyCode;
 static NSString *timeInterval;
 static NSString *envType;
+<<<<<<< HEAD
+=======
+static NSString *merchantAuthID;
+static NSString *merchantAuthPassword;
+>>>>>>> apple-paysafe
 
 @interface PaySafeDef : NSObject
 
@@ -57,4 +62,15 @@ static NSString *envType;
 
 +(NSString*)getOptimalUrl;
 
+<<<<<<< HEAD
+=======
++(NSString*)merchantAuthID;
++(void)setMerchantAuthID:(NSString *)ID;
+
++(NSString*)merchantAuthPassword;
++(void)setMerchantAuthPassword:(NSString *)Password;
+
+
+
+>>>>>>> apple-paysafe
 @end
