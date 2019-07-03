@@ -34,7 +34,7 @@ class TVViewController: UIViewController , UITextFieldDelegate, AuthorizationPro
         self.title = "Apple Pay"
         
         if(appDelegate.PaysafeAuthController?.isApplePaySupport() == false){
-            payNowButton?.setImage(UIImage(named: "payNow_img"), for: UIControlState())
+            payNowButton?.setImage(UIImage(named: "payNow_img"), for: UIControl.State())
             isApplePaySupports = false
         }
         else
@@ -182,7 +182,7 @@ class TVViewController: UIViewController , UITextFieldDelegate, AuthorizationPro
     
     func callBackResponseFromOptimalRequest(_ response: [AnyHashable: Any]!) {
         print("callBackResponseFromOptimalRequest")
-        print(response)
+        print(response as Any)
       //  let jsonResult = response as? Dictionary<String, AnyObject>
     }
     
