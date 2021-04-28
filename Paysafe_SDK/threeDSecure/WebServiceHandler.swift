@@ -147,7 +147,7 @@ class WebServiceHandler: NSObject, WebServiceHandlerProtocol {
         request.allHTTPHeaderFields = headers
         request.httpBody = requestData
 
-        let task = session.dataTask(with: request) { [weak self] data, response, error in
+        let task = session.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
                 self?.handleDataTaskCompletion(with: data,
                                                response: response,
