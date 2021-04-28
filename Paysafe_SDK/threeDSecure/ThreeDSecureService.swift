@@ -116,8 +116,8 @@ import CardinalMobile
                                                            sdkInfo: sdkInfo)
         webServiceHandler.getJWTToken(with: requestInfo,
                                       correlationId: correlationId,
-                                      completion: { [weak self] (result: Result<ThreeDSecureJWTResponse, Error>) in
-                                        self?.didRecieveJWT(result, completion: completion)
+                                      completion: {(result: Result<ThreeDSecureJWTResponse, Error>) in
+                                        self.didRecieveJWT(result, completion: completion)
         })
     }
 
