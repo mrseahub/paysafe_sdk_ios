@@ -149,7 +149,7 @@ class WebServiceHandler: NSObject, WebServiceHandlerProtocol {
 
         let task = session.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {
-                self?.handleDataTaskCompletion(with: data,
+                self.handleDataTaskCompletion(with: data,
                                                response: response,
                                                error: error,
                                                completion: completion)
