@@ -339,8 +339,8 @@ extension ThreeDSecureService {
         webNavigationController = UINavigationController(rootViewController: webController)
 
         let challengeCorrelationId = correlationId
-        webController.continueWith(payload: sdkChallengePayload) { [weak self] result in
-            self?.dismissWebview()
+        webController.continueWith(payload: sdkChallengePayload) { result in
+            self.dismissWebview()
 
             switch result {
             case .failure(let error):
@@ -348,7 +348,7 @@ extension ThreeDSecureService {
 
             case .success(let authenticationID):
                 guard let authenticationID = authenticationID as? String else {
-                    self?.logger.log(message: Errors.ErrorType.internalSDKError, eventType: .internalSDKError, correlationId: challengeCorrelationId)
+                    self.logger.log(message: Errors.ErrorType.internalSDKError, eventType: .internalSDKError, correlationId: challengeCorrelationId)
                     completion(.failure(Errors.internalSDKError))
                     return
                 }
